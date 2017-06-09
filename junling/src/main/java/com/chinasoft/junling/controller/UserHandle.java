@@ -33,8 +33,8 @@ public class UserHandle {
 	private UserHandleService UserHandeleServiceImpl;
 	@RequestMapping("/queryCollectBooks")
 	@ResponseBody
-	public Map queryCollectBooks(HttpServletRequest req,HttpServletResponse resp) throws IOException{
-		List<Books> list = UserHandeleServiceImpl.query();
+	public Map queryCollectBooks(HttpServletRequest req,HttpServletResponse resp,String lID) throws IOException{
+		List<Books> list = UserHandeleServiceImpl.query(lID);
 		Map map=new HashMap<>();
 		map.put("rows", list);
 		return map;
@@ -43,7 +43,6 @@ public class UserHandle {
 	 @ResponseBody
 	public JSONObject deleteCollectBooks(HttpServletRequest req,HttpServletResponse resp,int[] ids) throws IOException{
 		 JSONObject json=new JSONObject();
-		 System.out.println(ids);
 	     if(UserHandeleServiceImpl.delete(ids)){  
 	    	 json.put("status", 1);
 			 json.put("tip", "删除成功"); 
