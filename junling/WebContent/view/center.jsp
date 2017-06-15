@@ -5,11 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主界面</title>
-<script type="text/javascript" src="/easyui/jquery-easyui-1.5.2/jquery.min.js"></script>
-<script type="text/javascript" src="/easyui/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
-<link  rel="stylesheet" href="/easyuis/jquery-easyui-1.5.2/themes/icon.css">
-<link rel="stylesheet" href="/easyui/jquery-easyui-1.5.2/themes/metro/easyui.css">
-<link rel="stylesheet" href="/easyui/css/main.css">
+<script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.min.js"></script>
+<script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+<link  rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
+<link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/metro/easyui.css">
+<link rel="stylesheet" href="/junling/css/main.css">
 <script type="text/javascript">
 	function add(title,url){
 		if($('#tabs').tabs('exists',title)){
