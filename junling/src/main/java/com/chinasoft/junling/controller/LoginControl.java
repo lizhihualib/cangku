@@ -1,9 +1,14 @@
 package com.chinasoft.junling.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.chinasoft.junling.bean.Login;
+import com.chinasoft.junling.service.ILoginService;
+import com.chinasoft.junling.service.imp.LoginServiceImp;
 
 /** 
  * 登录认证的控制器 
@@ -11,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/login")
 public class LoginControl { 
-  
+	@Resource
+  private ILoginService loginService;
  /** 
   * 登录 
   * @param session 
@@ -23,11 +29,17 @@ public class LoginControl {
   * @return 
   */
  @RequestMapping(value="/login") 
- public String login(HttpSession session,String username,String password) throws Exception{  
-  //在Session里保存信息 
-  session.setAttribute("username", username); 
+ public String login(HttpSession session,Login login) throws Exception{  
+
+  System.out.println(login.toString());
+  
+       Login loginBean= loginService.queryLogin(login);
+       //在Session里保存信息 
+       session.setAttribute("username", loginBean.getuName());
+       if(loginBean.getId()!=0) 
   //重定向 
   return "redirect:../view/main.jsp"; 
+       return "view/login";  
  } 
    
  /** 
