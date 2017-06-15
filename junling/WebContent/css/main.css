@@ -1,0 +1,11 @@
+.left{
+	text-align: center;
+}
+.left a{
+	display:block;
+	margin-bottom:-2px;
+}
+.top{
+	display:block;
+	margin-top:15px;
+}
