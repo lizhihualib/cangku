@@ -30,7 +30,7 @@ public class LoginControl {
   */
  @RequestMapping(value="/login") 
  public String login(HttpSession session,Login login) throws Exception{  
-
+	 System.out.println("lalalalalal");
   System.out.println(login.toString());
   
        Login loginBean= loginService.queryLogin(login);

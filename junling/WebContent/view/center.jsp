@@ -41,7 +41,7 @@
 					<a>阅豆充值</a><br>
 					<a>晋升作者</a><br>
 					<a>在线阅读</a><br>
-					<a>个人收藏</a><br>
+					<a href="javascript:void(0);" onclick="add('个人收藏','/junling/view/UserHandle/collect.jsp')">个人收藏</a><br>
 					<a>上传小说</a><br>
 					<a>个人写书管理</a><br>
 				</div>
