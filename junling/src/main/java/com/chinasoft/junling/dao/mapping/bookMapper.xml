@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.chinasoft.junling.dao.IBookDao">
+  <resultMap type="books" id="booksResults">
+ 		<id column="bid" property="bid"/>
+ 		<result column="bName" property="bName"/>
+ 		<result column="bType" property="bType"/>
+ 		<result column="bState" property="bState" />
+ 		<result column="bIntro" property="bIntro"/>
+ 		<result column="bClicks" property="bClicks" />
+ 		<result column="bDownloads" property="bDownloads" />
+ 		<result column="bEdittime" property="bEdittime" />
+ 		<result column="bOvertime" property="bOverTime" />
+ 		<result column="users_uId" property="users_uId" />
+  </resultMap>
+  
+  <select id="queryBooks" parameterType="books" resultMap="booksResults">
+ 		
+ 		select * from books 
+ 		
+  </select>
+  
+  </mapper>
+  
+  
+ 	
