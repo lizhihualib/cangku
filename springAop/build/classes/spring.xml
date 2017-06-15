@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	
+	xmlns:context="http://www.springframework.org/schema/context"	
+	xmlns:aop="http://www.springframework.org/schema/aop"		
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	">
+	<!-- 配置测试类 -->
+	<bean id="springTest" class="com.chinasoft.spring.aop.SpringTest"/>
+	<bean id="springTest2" class="com.chinasoft.spring.aop.SpringTest2"/>
+	
+	<!-- 配置切面对象 -->
+	<bean id="testAspect" class="com.chinasoft.spring.aop.TestAspect"/>
+	<!-- aop配置 -->
+	<aop:config>
+		<!-- 配置切面指向对象 -->
+		<aop:aspect id="testAspectAop" ref="testAspect">
+			<!-- 配置切点，可以从哪些地方开始切入 -->
+			<aop:pointcut expression="execution(public * com.chinasoft.spring.aop.*.*(..))" id="testPointcut"/>
+			
+			<!-- 配置切点切入后要执行的方法 -->
+			<!-- <aop:before method="doBefore" pointcut-ref="testPointcut"/>
+			<aop:after method="doAfter" pointcut-ref="testPointcut"/>
+			<aop:after-throwing method="doThrowing" pointcut-ref="testPointcut" /> -->	
+			<aop:around method="doAround" pointcut-ref="testPointcut" /> 
+		</aop:aspect>	
+	</aop:config>
+</beans>
