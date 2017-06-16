@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">  
    $(function(){
 		//通过table标签得的一个分页插件
-		var pp=$("#table").datagrid("getPager");	
+		var pp=$("#table").datagrid("getPager");
 		$(pp).pagination({			
 			pageSize:10,
 			pageList:[2,3,5,10],
