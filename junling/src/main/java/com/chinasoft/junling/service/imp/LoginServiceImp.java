@@ -1,6 +1,8 @@
 package com.chinasoft.junling.service.imp;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -23,25 +25,33 @@ public class LoginServiceImp implements ILoginService{
 	@Override
 	public boolean insertLogin(Login login) {
 		// TODO Auto-generated method stub
-		return false;
+		return loginDao.insertLogin(login);
 	}
 
 	@Override
-	public boolean updatePwd(Login login) {
+	public boolean updateLogin(Login login) {
 		// TODO Auto-generated method stub
-		return false;
+		return loginDao.updateLogin(login);
+	}
+
+
+	@Override
+	public boolean deleteLogin(String ids) {
+		// TODO Auto-generated method stub
+		
+		return loginDao.deleteLogin(ids);
 	}
 
 	@Override
-	public boolean updateType(Login login) {
+	public List<Login> findAll(String type) {
 		// TODO Auto-generated method stub
-		return false;
+		return loginDao.findAll(type);
 	}
 
 	@Override
-	public boolean deleteLogin(Login login) {
+	public Login findById(int id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 }
