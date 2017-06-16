@@ -31,23 +31,16 @@ $(function(){
 		}
 		
 	}) 
-	$("#update").click(function(){
-			//获取选中行，如果选中了多行，则获取的是第一个选中行
-			var row=$("#table").datagrid("getSelected");
+	$("#add").click(function(){
+			$("#updateForm").form("clear");
+			$("#updateDlg").dialog("open").dialog("setTitle","增加用户信息");
+			$("#saveUrl").val("/junling/user/insertUser.action");
 			$("#uusername").textbox({
-				readonly:true
+				readonly:false,
+				required:false
 			});
-			$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
-			$("#saveUrl").val("/junling/user/updateUser");
-			/* 
-			//1.为每一个输入框赋值
-			$("#uusername").textbox("setValue",row.username);
-			$("#uuserpwd").textbox("setValue",row.userpwd);
-			$("#urealname").textbox("setValue",row.realname); */
 			
-			//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
-			$("#updateForm").form("load",row);
-		})
+		});
 	
 	
 	
@@ -79,7 +72,29 @@ $(function(){
 			}
 		})
 })
-
+function update(){
+	
+		$("#updateForm").form("submit",
+				{
+					url:$("#saveUrl").val(),
+					onSubmit:function(){
+				
+						return $(this).form('validate');
+					},
+					success:function(data){
+						var json=eval("("+data+")");
+						alert(json.tip);
+						$("#updateDlg").dialog("close");
+						$("#table").datagrid("reload");
+					}
+			
+				});
+		
+	}
+function closeDlg(){
+		$("#updateForm").form("clear");
+		$("#updateDlg").dialog("close");
+	}
 
 </script>
 </head>
@@ -102,8 +117,72 @@ $(function(){
 				<th field="uBankCard"  width="80">银行卡号</th>
 				<th field="uSignState"  width="80">签到状态</th>
 				<th field="uUploadNumbers"  width="80">可上传本数</th>
+				<th field="login_lID"  width="80">登陆id</th>
 			</tr>
 		</thead>
 	</table>
+	
+	<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
+		<input type="hidden" id="saveUrl">
+		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
+			<input type="hidden" name="id">
+			<table align="center">
+				<tr>
+					<td><label>真实名：</label></td>
+					<td><input class="easyui-textbox" name="uRealName" id="uRealName"  required="true"/></td>
+				</tr>
+				<tr>
+					<td><label>性别：</label></td>
+					<td><input class="easyui-textbox" name="uSex" id="uSex"  required="true"/></td>
+				</tr>
+				
+				<tr>
+					<td><label>出生日期：</label></td>
+					<td><input class="easyui-datebox" name="uBirthday"  id="uBirthday" required="true"/></td>
+				</tr>
+				<tr>
+					<td><label>手机号码：</label></td>
+					<td><input class="easyui-textbox" name="uPhone"  id="uPhone" required="true"/></td>
+				</tr>
+				<tr>
+					<td><label>邮箱：</label></td>
+					<td><input class="easyui-textbox"  name="uEmail"  id="uEmail" /></td>
+				</tr>
+				<tr>
+					<td><label>著名：</label></td>
+					<td><input class="easyui-textbox"  name="uPenName"  id="uPenName"  /></td>
+				</tr>
+				<tr>
+					<td><label>阅豆：</label></td>
+					<td><input class="easyui-textbox"  name="uBeans"  id="uBeans"  /></td>
+				</tr>
+				<tr>
+					<td><label>银行卡号：</label></td>
+					<td><input class="easyui-textbox"  name="uBankCard"  id="uBankCard" /></td>
+				</tr>
+				<tr>
+					<td><label>签到状态：</label></td>
+					<td><input class="easyui-textbox"  name="uSignState"  id="uSignState"  /></td>
+				</tr>
+				<tr>
+					<td><label>可上传本数：</label></td>
+					<td><input class="easyui-textbox"  name="uUploadNumbers"  id="uUploadNumbers"  /></td>
+				</tr>
+				<tr>
+					<td><label>登陆id：</label></td>
+					<td><input class="easyui-textbox"  name="login_lID"  id="login_lID"  /></td>
+				</tr>
+			</table>
+			
+			<div id="update-dlg-btns" align="center">
+				<a href="javascript:void(0);" class="easyui-linkbutton" 
+					iconCls="icon-ok" onclick="update();" style="width:100px;height:30px" >保存</a>
+					<a href="javascript:void(0);" class="easyui-linkbutton" 
+					iconCls="icon-cancel" onclick="closeDlg();" style="width:100px;height:30px">取消</a>
+			</div>
+		</form>
+		
+	</div>
+	
 </body>
 </html>

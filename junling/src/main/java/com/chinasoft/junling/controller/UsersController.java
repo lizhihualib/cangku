@@ -18,11 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.chinasoft.junling.bean.Login;
 import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.service.IUsersService;
-import com.chinasoft.junling.util.Date2JsonValueProcessor;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 
 @Controller
@@ -46,16 +43,27 @@ public class UsersController {
 	 public Map queryUsers(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
 		List<Users> rows=userService.queryUsers(users);
+
+
+		map.put("total",200);
 		map.put("rows", rows);
 		return map;
 		
 	
 	}
-	@RequestMapping(value="/insertUser")
-	 public boolean insertUser(HttpSession session,Users users) throws Exception{
+	@RequestMapping(value="/insertUser",produces="application/json;charset=utf-8")
+	 public void insertUser(HttpServletResponse resp,Users users) throws Exception{
 		
-		
-		return false;  
+		boolean flag=userService.insertUser(users);
+		JSONObject json=new JSONObject();
+		if(flag){
+			json.put("status", 1);
+			json.put("tip", "添加成功");
+		}else{
+			json.put("status", 0);
+			json.put("tip", "添加失败");
+		}
+		resp.getWriter().println(json);  
 	
 	
 	
