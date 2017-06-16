@@ -1,5 +1,7 @@
 package com.chinasoft.junling.service.imp;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,9 +17,8 @@ public class BookServiceImpl implements IBookService{
 	private BookDao bookDao;
 	
 	@Override
-	public Books queryBooks(Books books) {
-		Books book=bookDao.queryBooks(books);
-		return book;
+	public List<Books> queryBooks(Books books) {
+		return bookDao.queryBooks(books);
 	}
 	
 }

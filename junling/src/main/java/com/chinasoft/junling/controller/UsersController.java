@@ -1,7 +1,9 @@
 package com.chinasoft.junling.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -41,17 +43,11 @@ public class UsersController {
 	}
 	@RequestMapping(value="/queryUsers")
 	@ResponseBody
-	 public JSONObject queryUsers(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
-		
-		List<Users> list=userService.queryUsers(users);
-		JsonConfig config=new JsonConfig();
-		config.registerJsonValueProcessor(Date.class, new Date2JsonValueProcessor("yyyy-MM-dd"));
-		System.out.println("haha");
-		JSONObject json=new JSONObject();
-		json.put("rows", JSONArray.fromObject(list, config));
-		json.put("total",200);
-		System.out.println(json.toString());
-		return json;
+	 public Map queryUsers(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
+		Map map=new HashMap<String,Object>();
+		List<Users> rows=userService.queryUsers(users);
+		map.put("rows", rows);
+		return map;
 		
 	
 	}
