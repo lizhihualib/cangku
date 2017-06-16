@@ -48,7 +48,7 @@ public class LoginControl {
        session.setAttribute("username", loginBean.getuName());
        if(loginBean.getlID()!=0) 
   //重定向 
-  return "redirect:../view/main.jsp"; 
+  return "view/main"; 
        return "view/login";  
  } 
    

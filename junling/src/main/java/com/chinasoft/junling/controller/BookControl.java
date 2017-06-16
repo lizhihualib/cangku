@@ -12,7 +12,7 @@ import com.chinasoft.junling.service.IBookService;
 @Controller
 @RequestMapping("/book")
 public class BookControl {
-	@Resource
+	@Resource	
 	private IBookService bookservice;
 	
 	
