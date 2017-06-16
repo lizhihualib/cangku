@@ -13,12 +13,13 @@ import com.chinasoft.junling.service.IBookService;
 @RequestMapping("/book")
 public class BookControl {
 	@Resource
-	private IBookService bookservice;
+	private IBookService bookService;
 	
 	
 	@RequestMapping(value="/querybooks") 
 	public Books querybooks(HttpSession session,Books books){
-		Books book=bookservice.queryBooks(books);
-		return book;
+		Books book=bookService.queryBooks(books);
+		System.out.println(book.toString());
+		return null;
 	}
 }
