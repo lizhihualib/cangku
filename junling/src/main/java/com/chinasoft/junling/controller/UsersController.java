@@ -43,6 +43,8 @@ public class UsersController {
 	 public Map queryUsers(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
 		List<Users> rows=userService.queryUsers(users);
+
+
 		map.put("total",200);
 		map.put("rows", rows);
 		return map;
