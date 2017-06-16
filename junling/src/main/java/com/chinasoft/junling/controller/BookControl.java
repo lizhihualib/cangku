@@ -12,8 +12,10 @@ import com.chinasoft.junling.service.IBookService;
 @Controller
 @RequestMapping("/book")
 public class BookControl {
-	@Resource
-	private IBookService bookService;
+
+	@Resource	
+	private IBookService bookservice;
+
 	
 	
 	@RequestMapping(value="/querybooks") 

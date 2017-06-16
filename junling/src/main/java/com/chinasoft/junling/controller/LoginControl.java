@@ -46,6 +46,7 @@ public class LoginControl {
        Login loginBean= loginService.queryLogin(login);
        //在Session里保存信息 
 
+
        session.setAttribute("login", loginBean);
        System.out.println(loginBean.getlID());
       if(loginBean.getlID()!=0){ 
@@ -54,6 +55,7 @@ public class LoginControl {
     	  }else
      return "view/main"; 
         
+
  } 
    
  /** 

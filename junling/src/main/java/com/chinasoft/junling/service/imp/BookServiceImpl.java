@@ -8,8 +8,8 @@ import com.chinasoft.junling.bean.Books;
 import com.chinasoft.junling.dao.BookDao;
 import com.chinasoft.junling.service.IBookService;
 
+@Service("bookservice")
 
-@Service
 public class BookServiceImpl implements IBookService{
 	@Resource
 	private BookDao bookDao;
