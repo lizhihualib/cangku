@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.chinasoft.junling.dao.IBookDao">
+  <mapper namespace="com.chinasoft.junling.dao.BookDao">
   <resultMap type="books" id="booksResults">
- 		<id column="bid" property="bid"/>
+ 		<id column="bId" property="bId"/>
  		<result column="bName" property="bName"/>
  		<result column="bType" property="bType"/>
  		<result column="bState" property="bState" />
