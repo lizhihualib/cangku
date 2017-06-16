@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %> 
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,7 +32,12 @@
 </head>
 <body>
 	<div id="cc" class="easyui-layout" style="width: 100%; height: 800px;">
-		<div data-options="region:'north'" style="height:100px;"></div>
+		<div data-options="region:'north'" style="height:100px;">
+		 <lable style="font-size: 20px">欢迎您:<span style="color: green">${loginBean.uName}</span></lable>
+		      <c:if test="${loginBean!=null}"> 
+        <a href="${pageContext.request.contextPath }/login/logout.action">退出</a> 
+               </c:if> 
+		</div>
 		<div  data-options="region:'west',title:'君临天下'" style="width:110px;">
 			<div  class="easyui-accordion" style="width:110px;height:300px;">
 				
@@ -44,10 +52,15 @@
 					<a>上传小说</a><br>
 					<a>个人写书管理</a><br>
 				</div>
-				<div class="left" title="用户管理">
+				<div class="left" title="用户信息">
 					<a class="top" href="javascript:void(0);" onclick="add('查询','../view/queryuser.jsp')">作者管理</a><br>
 					<a>读者管理</a><br>
 					
+				</div>
+								
+				<div class="left" title="账号管理">
+					<a class="top" href="javascript:void(0);" onclick="add('账号操作','/junling/view/allLogins.jsp')" >账号操作</a><br>
+		
 				</div>
 				
 				<div class="left" title="图书管理">

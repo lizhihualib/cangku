@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#showMsg").html(request);  //登录错误提示信息
                     },
                     success: function (data) {
-                       document.location = "main.jsp";
+                       document.location = "<%=basePath%>login/toCenter.action";
                     }
                 });
             }

@@ -14,7 +14,7 @@ import com.chinasoft.junling.service.IBookService;
 public class BookControl {
 
 	@Resource	
-	private IBookService bookservice;
+	private IBookService bookService;
 
 	
 	
