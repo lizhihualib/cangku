@@ -8,24 +8,36 @@
  		<result column="uName" property="uName"/>
  		<result column="uPwd" property="uPwd"/>
  		<result column="uType" property="uType" />
- 		<result column="user_uId" property="user_uId"/>
+ 
  	</resultMap>
  	 <select id="queryLogin" parameterType="login" resultMap="loginResults">
  		
  		select * from login 
  		where uName=#{uName} and uPwd=#{uPwd} and uType=#{uType}
  	</select>
+ 	<select id="findById" parameterType="java.lang.String" resultMap="loginResults">
+ 		select * from login where lID=#{_parameter}
+ 	</select>
+ 	 <select id="findAll" parameterType="java.lang.String" resultMap="loginResults">
+ 		select * from login 
+ 		      <where>
+            <if test="_parameter!=null and _parameter!=''">  
+                 uType= #{_parameter} 
+            </if>
+
+        </where>
+ 	</select>
  	 	<!-- useGeneratedKeys="true" keyProperty="uid" 表示在插入成功后，会将插入数据后的id返回给login对象 -->
  	<insert id="insertLogin" parameterType="login" useGeneratedKeys="true" keyProperty="id" >
- 		insert into login(uName,uPwd) values(#{uName},#{uPwd})
+ 		insert into login(uName,uPwd,uType) values(#{uName},#{uPwd},#{uType})
  	</insert>
  	<!-- useGeneratedKeys="true" keyProperty="uid" 表示在修改成功后，会将修改数据后的id返回给user对象 -->
- 	<update id="updatePwd" parameterType="login" useGeneratedKeys="true" keyProperty="id" >
- 		update login set uPwd=#{uPwd} where id=#{id}
+ 	<update id="updateLogin" parameterType="login" useGeneratedKeys="true" keyProperty="id" >
+ 		update login set uPwd=#{uPwd},uType=#{uType} where lID=#{lID}
  	</update>
  	
- 	<delete id="deleteLogin" parameterType="login">
- 		delete from login where uPwd=#{uPwd} and uName=#{uName}
+ 	<delete id="deleteLogin" parameterType="java.lang.String">
+ 		delete from login where lID in(#{_parameter})
  	</delete>
  	
  	</mapper>

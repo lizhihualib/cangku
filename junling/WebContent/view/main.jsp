@@ -15,5 +15,6 @@
   <a href="${pageContext.request.contextPath }/login/logout.action">退出</a> 
  </c:if> 
  ${message}
+  <a href="${pageContext.request.contextPath }/login/getAllLogins.action">查询</a>
 </body>
 </html>

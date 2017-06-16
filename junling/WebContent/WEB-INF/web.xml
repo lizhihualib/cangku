@@ -28,7 +28,8 @@
   	<servlet-name>springMVC</servlet-name>
   	<url-pattern>*.action</url-pattern>
   </servlet-mapping>
-    <!-- 解决工程编码过滤器 -->  
+      <!-- 解决工程编码过滤器 -->  
+
     <filter>  
         <filter-name>encodingFilter</filter-name>  
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
@@ -41,5 +42,4 @@
             <param-value>true</param-value>  
         </init-param>  
     </filter> 
-  
 </web-app>
