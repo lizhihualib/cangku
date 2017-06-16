@@ -15,6 +15,7 @@
   	<result column="uBankCard" property="uBankCard"/>
   	<result column="uSignState" property="uSignState"/>
   	<result column="uUploadNumbers" property="uUploadNumbers"/>
+  	<result column="login_lID" property="login_lID"/>
   </resultMap>
   <select id="queryUser" resultMap="usersResults">
   	select * from users where uId=#{uId}
@@ -48,7 +49,7 @@
   </sql>
   
   <insert id="insertUser">
-  	insert into users(uId,uRealName,uSex,uBirthday,uPhone,uEmail,uPenName,uBeans,uBankCard,uSignState,uUploadNumbers) values(#{UId},#{uRealName},#{uSex},#{uBirthday},#{uPhone},#{uEmail},#{uPenName},#{uBeans},#{uBankCard},#{uSignState},#{uUploadNumbers}) 
+  	insert into users(uId,uRealName,uSex,uBirthday,uPhone,uEmail,uPenName,uBeans,uBankCard,uSignState,uUploadNumbers,login_lID) values(#{uId},#{uRealName},#{uSex},#{uBirthday},#{uPhone},#{uEmail},#{uPenName},#{uBeans},#{uBankCard},#{uSignState},#{uUploadNumbers},#{login_lID}) 
   </insert>
   
   <delete id="deleteUser" parameterType="java.lang.String">
