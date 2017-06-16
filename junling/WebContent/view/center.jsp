@@ -35,8 +35,8 @@
 			<div  class="easyui-accordion" style="width:110px;height:300px;">
 				
 				<div class="left" title="用户操作">
-					<a class="top" href="javascript:void(0);" onclick="add('百度一下','http://www.baidu.com')">签到</a><br>
-					<a href="javascript:void(0);" onclick="add('360','http://www.360.com')">个人信息</a><br>
+					<a class="top" href="javascript:void(0);" onclick="">签到</a><br>
+					<a href="javascript:void(0);" onclick="add()">个人信息</a><br>
 					<a>修改信息</a><br>
 					<a>阅豆充值</a><br>
 					<a>晋升作者</a><br>
@@ -45,18 +45,12 @@
 					<a>上传小说</a><br>
 					<a>个人写书管理</a><br>
 				</div>
-				<div class="left" title="作者管理">
-					<a class="top">查询作者</a><br>
-					<a>添加作者</a><br>
-					<a>修改作者</a><br>
-					<a>注销作者</a><br>
+				<div class="left" title="用户管理">
+					<a class="top" href="javascript:void(0);" onclick="add('查询','../view/queryuser.jsp')">作者管理</a><br>
+					<a>读者管理</a><br>
+					
 				</div>
-				<div class="left" title="读者管理">
-					<a class="top">查询读者</a><br>
-					<a>添加读者</a><br>
-					<a>修改读者</a><br>
-					<a>注销读者</a><br>
-				</div>
+				
 				<div class="left" title="图书管理">
 					<a class="top">查询图书</a><br>
 					<a>添加图书</a><br>
@@ -77,5 +71,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

@@ -35,11 +35,14 @@ public class LoginControl {
   
        Login loginBean= loginService.queryLogin(login);
        //在Session里保存信息 
-       session.setAttribute("username", loginBean.getuName());
-       if(loginBean.getId()!=0) 
-  //重定向 
-  return "redirect:../view/main.jsp"; 
-       return "view/login";  
+       session.setAttribute("login", loginBean);
+       System.out.println(loginBean.getlID());
+      if(loginBean.getlID()!=0){ 
+      //重定向 
+    	  return "view/center"; 
+    	  }else
+     return "view/main"; 
+        
  } 
    
  /** 

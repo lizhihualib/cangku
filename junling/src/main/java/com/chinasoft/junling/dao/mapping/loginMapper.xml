@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    <mapper namespace="com.chinasoft.junling.dao.LoginDao">
  	<resultMap type="login" id="loginResults">
- 		<id column="id" property="id"/>
+ 		<id column="lID" property="lID"/>
  		<result column="uName" property="uName"/>
  		<result column="uPwd" property="uPwd"/>
  		<result column="uType" property="uType" />

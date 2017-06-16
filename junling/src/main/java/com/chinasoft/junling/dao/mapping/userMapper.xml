@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.chinasoft.junling.dao.UsersDao">
+  <resultMap id="usersResults" type="users">
+  	<id column="uId" property="uId"/>
+  	<result column="uRealName" property="uRealName"/>
+  	<result column="uSex" property="uSex"/>
+  	<result column="uBirthday" property="uBirthday"/>
+  	<result column="uPhone" property="uPhone"/>
+  	<result column="uEmail" property="uEmail"/>
+  	<result column="uPenName" property="uPenName"/>
+  	<result column="uBeans" property="uBeans"/>
+  	<result column="uBankCard" property="uBankCard"/>
+  	<result column="uSignState" property="uSignState"/>
+  	<result column="uUploadNumbers" property="uUploadNumbers"/>
+  </resultMap>
+  <select id="queryUser" resultMap="usersResults">
+  	select * from users where uId=#{uId}
+  </select>
+  
+   <select id="queryUsers" resultMap="usersResults" parameterType="users">
+  	select * from users 
+  	<include refid="condition"/>
+  </select>
+  <sql id="condition">
+  	<where>
+  		<if test="uId!=null and uId!=''">
+  			uId=#{uId}
+  		</if>
+  		<if test="uRealName !=null and uRealName!=''">
+  			and uRealName=#{uRealName}
+  		</if>
+  		<if test="uSex!=null and uSex!=''">
+  			and uSex=#{uSex}
+  		</if>
+  		<if test="uPhone!=null and uPhone!=''">
+  			and	uPhone=#{uPhone}
+  		</if>
+  		<if test="uEmail">
+  			and uEmail=#{uEmail}
+  		</if>
+  		<if test="uPenName">
+  			and uPenName=#{uPenName}
+  		</if>
+  	</where>
+  </sql>
+  
+  <insert id="insertUser">
+  	insert into users(uId,uRealName,uSex,uBirthday,uPhone,uEmail,uPenName,uBeans,uBankCard,uSignState,uUploadNumbers) values(#{UId},#{uRealName},#{uSex},#{uBirthday},#{uPhone},#{uEmail},#{uPenName},#{uBeans},#{uBankCard},#{uSignState},#{uUploadNumbers}) 
+  </insert>
+  
+  <delete id="deleteUser" parameterType="java.lang.String">
+  	delete from users where uId in(#{_parameter})
+  </delete>
+  
+  <update id="updateUser" parameterType="java.lang.String">
+  	update users set 
+  </update>
+  
+  
+  
+  
+  </mapper>
