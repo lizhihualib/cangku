@@ -36,7 +36,7 @@ public class LoginServiceImp implements ILoginService{
 
 
 	@Override
-	public boolean deleteLogin(String ids) {
+	public boolean deleteLogin(int[] ids) {
 		// TODO Auto-generated method stub
 		
 		return loginDao.deleteLogin(ids);

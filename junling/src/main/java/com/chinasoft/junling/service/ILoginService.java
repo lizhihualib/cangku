@@ -9,7 +9,7 @@ public interface ILoginService {
      Login queryLogin(Login login);
      boolean insertLogin(Login login);
      boolean updateLogin(Login login);
-     boolean deleteLogin(String ids);
+     boolean deleteLogin(int[] ids);
      int findByName(Login login);
      String total(Login login);
      List <Login> findAll(Login login);
