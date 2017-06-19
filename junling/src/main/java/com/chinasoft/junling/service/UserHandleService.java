@@ -7,7 +7,7 @@ import com.chinasoft.junling.bean.Books;
 public interface UserHandleService {
 	public List<Books> query();
 	public void add();
-	public void delete();
+	public boolean delete(int[] ids);
 	public void update();
 
 	

@@ -7,6 +7,6 @@ import com.chinasoft.junling.bean.Books;
 public interface UserHandleDao {
 	public List<Books> queryCollect();
 	public void addCollect();
-	public void deleteCollect();
+	public boolean deleteCollect(int[] ids);
 	public void updateCollect();
 }
