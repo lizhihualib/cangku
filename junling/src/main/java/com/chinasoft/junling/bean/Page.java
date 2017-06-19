@@ -2,7 +2,7 @@ package com.chinasoft.junling.bean;
 
 public class Page {
 private int curPage=1;
-private int pageSize=5;
+private int pageSize=2;
 private int star;
  
 public int getCurPage() {

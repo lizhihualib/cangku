@@ -14,46 +14,52 @@
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
 <script type="text/javascript">
 $(function(){
-	$("#table").datagrid({
-		pagination:true
-	});
-	var p=$("#table").datagrid('getPager');
-	 $(p).pagination({
-		total:200,
-		pageSize:10,
-		pageList:[10,20,30,50],
-		beforePageText:'第',
-		afterPageText:'页   共{pages}页',
-		displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-		onSelectPage:function(pageNumber,pageSize){
+	//通过table标签得的一个分页插件
+	var pp=$("#table").datagrid("getPager");
+	$(pp).pagination({			
+		pageSize:2,
+		pageList:[2,3,5,10],
+		beforePageText:"第",	
+		afterPageText:"页    共{pages}页",
+		displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',  
+		onSelectPage:function(curPage,pageSize){
+			var data={
+					curPage:curPage,
+					pageSize:pageSize, 
+					
+				
+				
+			}
+	        alert(curPage+" "+pageSize)
+			//发送ajax请求
+			//$("#table").datagrid("reload",data);
+			$.ajax({
+				url:"/junling/user/queryReaders.action",
+				type:"post",
+				dataType:"json",
+				data:data,
+				success:function(respData){
+					$("#table").datagrid("loadData",respData)
+				}
+				
+			});
 			
-			alert("当前页："+pageNumber+"每页条数:"+pageSize)
 		}
-		
-	}) 
+	});
 	$("#add").click(function(){
 			$("#updateForm").form("clear");
 			$("#updateDlg").dialog("open").dialog("setTitle","增加用户信息");
 			$("#saveUrl").val("/junling/user/insertUser.action");
-			$("#uusername").textbox({
-				readonly:false,
-				required:false
-			});
 			
 		});
-	
 	 $("#update").click(function(){
-		//获取选中行，如果选中了多行，则获取的是第一个选中行
-			var row=$("#table").datagrid("getSelected");
-			$("#uusername").textbox({
-				readonly:true
+			//获取选中行，如果选中了多行，则获取的是第一个选中行
+				var row=$("#table").datagrid("getSelected");
+				$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
+				$("#saveUrl").val("/junling/user/updateUser.action");
+				//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
+				$("#updateForm").form("load",row);
 			});
-			$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
-			$("#saveUrl").val("/junling/user/updateUser.action");
-			//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
-			$("#updateForm").form("load",row);
-		});
-	
 	
 	$("#delete").click(function(){
 			var rows=$("#table").datagrid("getSelections");
@@ -63,32 +69,32 @@ $(function(){
 					//将值放入数组里面
 					idArr.push(row.uId);
 				})
-				$.messager.confirm("提示",'确认删除选中读者吗?',function(a){
-                     if (a){
-                    		$.ajax({
-            					url:"/junling/user/deleteUser.action",
-            					type:"post",
-            					dataType:"json",
-            					data:{
-            						"ids":idArr.toString(),
-            					},
-            					success:function(data){
-            						//var json=eval("("+data+")");
-            						alert(data.tip);
-            						$("#table").datagrid("reload");
-            					}
-            							
-            				})
-                          }
-                });
-
+				$.messager.confirm("提示",'确认删除选中作者吗?',function(a){
+                 if (a){
+                		$.ajax({
+        					url:"/junling/user/deleteUser.action",
+        					type:"post",
+        					dataType:"json",
+        					data:{
+        						uId:idArr.toString(),
+        					},
+        					success:function(data){
+        						//var json=eval("("+data+")");
+        						alert(data.tip);
+        						$("#table").datagrid("reload");
+        					}
+        							
+        				})
+                      }
+            });
 			}else{
 				alert("are you delete");
 			}
 		})
 })
 function update(){
-
+	//如果Id不为空进入修改操作
+	   if($("#uuId").val()!=""){
 	$("#updateForm").form("submit",
 			{
 				url:$("#saveUrl").val(),
@@ -104,7 +110,34 @@ function update(){
 				}
 		
 			});
-	
+	   }
+	   else{
+	$.ajax({
+        type:"post",
+        url:$("#saveUrl").val(),
+        data:{
+        	"uRealName":$("#uRealName").val(),
+        	"uSex":$("#uSex").val(),
+        	"uBirthday":$("#uBirthday").val(),
+        	"uPhone":$("#uPhone").val(),
+        	"uEmail":$("#uEmail").val(),
+        	"uPenName":$("#uPenName").val(),
+        	"uBeans":$("#uBeans").val(),
+        	"uBankCard":$("#uBankCard").val(),
+        	"uSignState":$("#uSignState").val(),
+        	"uUploadNumbers":$("#uUploadNumbers").val(),
+        	"login_lID":$("#login_lID").val(),
+  },
+        success:function(data){
+     	
+        	var json=eval("("+data+")");
+			alert(json.tip);
+			$("#updateDlg").dialog("close"); 
+          $('#table').datagrid('reload');
+   
+        }
+      })  
+	}
 }
 function closeDlg(){
 	$("#updateForm").form("clear");
@@ -117,7 +150,7 @@ function closeDlg(){
 	<input type="button" value="修改读者信息" id="update">
 	<input type="button" value="增加读者" id="add">
 	<input type="button" value="删除读者" id="delete">
-<table id="table"  class="easyui-datagrid"  url="/junling/user/queryReaders.action"   method="post">
+<table id="table"  class="easyui-datagrid"  url="/junling/user/queryReaders.action"  pagination="true"  method="post">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true" width="80"></th>

@@ -30,13 +30,23 @@ public class UserServiceImpl implements IUsersService{
 	}
 
 	@Override
-	public boolean deleteUser(String uId) {
+	public boolean deleteUser(int[] uId) {
 		return usersdao.deleteUser(uId);
 	}
 
 	@Override
 	public boolean updateUser(Users users) {
 		return usersdao.updateUser(users);
+	}
+
+	@Override
+	public int count(Users users) {
+		return usersdao.count(users);
+	}
+
+	@Override
+	public int count1(Users users) {
+		return usersdao.count1(users);
 	}
 
 

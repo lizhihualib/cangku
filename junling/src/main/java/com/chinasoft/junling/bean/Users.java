@@ -2,7 +2,7 @@ package com.chinasoft.junling.bean;
 
 import java.util.Date;
 
-public class Users {
+public class Users extends Page{
 private int uId;
  private String uRealName;
  private String uSex;

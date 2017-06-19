@@ -1,5 +1,6 @@
 package com.chinasoft.junling.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +32,12 @@ public class UsersController {
 	@ResponseBody
 	 public Map queryAuthors(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
+		System.out.println(users.getPageSize());
+		System.out.println(users.getCurPage());
+		System.out.println(users.getStar());
 		List<Users> rows=userService.queryAuthors(users);
-		map.put("total",200);
+		int count=userService.count(users);
+		map.put("total",count);
 		map.put("rows", rows);
 		return map;
 	
@@ -41,9 +46,9 @@ public class UsersController {
 	@ResponseBody
 	 public Map queryReaders(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
-
 		List<Users> rows=userService.queryReaders(users);
-		map.put("total",200);
+		int count1=userService.count(users);
+		map.put("total",count1);
 		map.put("rows", rows);
 		return map;
 	
@@ -83,9 +88,8 @@ public class UsersController {
 	
 	}
 	@RequestMapping(value="/deleteUser")
-	 public void deleteUser(HttpServletRequest req, HttpServletResponse resp,Users users) throws Exception{
-		String uId=req.getParameter("uId");
-		System.out.println(uId);
+	 public void deleteUser(HttpServletResponse resp,int[] uId) throws Exception{
+		System.out.println(Arrays.toString(uId));
 		boolean flag=userService.deleteUser(uId);
 		JSONObject json=new JSONObject();
 		if(flag){
