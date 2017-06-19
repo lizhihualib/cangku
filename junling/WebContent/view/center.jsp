@@ -45,8 +45,8 @@
 					<a>个人写书管理</a><br>
 				</div>
 				<div class="left" title="用户管理">
-					<a class="top" href="javascript:void(0);" onclick="add('查询','../view/queryuser.jsp')">作者管理</a><br>
-					<a>读者管理</a><br>
+					<a class="top" href="javascript:void(0);" onclick="add('作者管理','../view/queryAuthors.jsp')">作者管理</a><br>
+					<a class="top" href="javascript:void(0);" onclick="add('读者管理','../view/queryReaders.jsp')">读者管理</a><br>
 					
 				</div>
 				

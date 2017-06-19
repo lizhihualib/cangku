@@ -17,37 +17,14 @@
   	<result column="uUploadNumbers" property="uUploadNumbers"/>
   	<result column="login_lID" property="login_lID"/>
   </resultMap>
-  <select id="queryUser" resultMap="usersResults">
-  	select * from users where uId=#{uId}
+  <select id="queryAuthors" resultMap="usersResults" parameterType="users">
+  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=2
   </select>
-  
-   <select id="queryUsers" resultMap="usersResults" parameterType="users">
-  	select * from users 
-  	<include refid="condition"/>
+ 
+   <select id="queryReaders" resultMap="usersResults" parameterType="users">
+  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=3
   </select>
-  <sql id="condition">
-  	<where>
-  		<if test="uId!=null and uId!=''">
-  			uId=#{uId}
-  		</if>
-  		<if test="uRealName !=null and uRealName!=''">
-  			and uRealName=#{uRealName}
-  		</if>
-  		<if test="uSex!=null and uSex!=''">
-  			and uSex=#{uSex}
-  		</if>
-  		<if test="uPhone!=null and uPhone!=''">
-  			and	uPhone=#{uPhone}
-  		</if>
-  		<if test="uEmail">
-  			and uEmail=#{uEmail}
-  		</if>
-  		<if test="uPenName">
-  			and uPenName=#{uPenName}
-  		</if>
-  	</where>
-  </sql>
-  
+ 
   <insert id="insertUser">
   	insert into users(uId,uRealName,uSex,uBirthday,uPhone,uEmail,uPenName,uBeans,uBankCard,uSignState,uUploadNumbers,login_lID) values(#{uId},#{uRealName},#{uSex},#{uBirthday},#{uPhone},#{uEmail},#{uPenName},#{uBeans},#{uBankCard},#{uSignState},#{uUploadNumbers},#{login_lID}) 
   </insert>
@@ -56,11 +33,9 @@
   	delete from users where uId in(#{_parameter})
   </delete>
   
-  <update id="updateUser" parameterType="java.lang.String">
-  	update users set 
+  <update id="updateUser" parameterType="users" >
+  	update users set uRealName=#{uRealName},uSex=#{uSex},uBirthday=#{uBirthday},uPhone=#{uPhone},uEmail=#{uEmail},uPenName=#{},uBeans=#{uBeans},uBankCard=#{uBankCard},uBankCard=#{uBankCard},uSignState=#{uSignState},uUploadNumbers=#{uUploadNumbers},login_lID=#{login_lID} where uId=#{uId}
   </update>
-  
-  
   
   
   </mapper>

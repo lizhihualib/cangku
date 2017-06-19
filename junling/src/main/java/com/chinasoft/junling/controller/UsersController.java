@@ -27,26 +27,24 @@ import net.sf.json.JSONObject;
 public class UsersController {
 	@Resource
 	  private IUsersService userService;
-	@RequestMapping(value="/queryUser")
+	@RequestMapping(value="/queryAuthors")
 	@ResponseBody
-	 public void queryUser(HttpSession session,Users users) throws Exception{
-		Login login=(Login)session.getAttribute("login");
-		System.out.println(login.getUsers_uId());
-		System.out.println("haha");
-		users.setuId(login.getUsers_uId());
-		Users userinfo=userService.queryUser(users);
-		System.out.println(userinfo.getuId());
-	
-	}
-	@RequestMapping(value="/queryUsers")
-	@ResponseBody
-	 public Map queryUsers(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
+	 public Map queryAuthors(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
-		List<Users> rows=userService.queryUsers(users);
+		List<Users> rows=userService.queryAuthors(users);
 		map.put("total",200);
 		map.put("rows", rows);
 		return map;
-		
+	
+	}
+	@RequestMapping(value="/queryReaders")
+	@ResponseBody
+	 public Map queryReaders(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
+		Map map=new HashMap<String,Object>();
+		List<Users> rows=userService.queryReaders(users);
+		map.put("total",200);
+		map.put("rows", rows);
+		return map;
 	
 	}
 	@RequestMapping(value="/insertUser",produces="application/json;charset=utf-8")
@@ -66,11 +64,19 @@ public class UsersController {
 	
 	
 	}
-	@RequestMapping(value="/updatetUser")
-	 public boolean updatetUser(HttpSession session,Users users) throws Exception{
-		
-		
-		return false;  
+	@RequestMapping(value="/updateUser")
+	 public void updateUser(HttpServletResponse resp,Users users) throws Exception{
+		boolean flag=userService.updateUser(users);
+		System.out.println(users);
+		JSONObject json=new JSONObject();
+		if(flag){
+			json.put("status", 1);
+			json.put("tip", "修改成功");
+		}else{
+			json.put("status", 0);
+			json.put("tip", "修改失败");
+		}
+		resp.getWriter().println(json);  
 	
 	
 	

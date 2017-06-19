@@ -112,11 +112,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             						"ids":idArr.toString(),
             					},
             					success:function(data){
-            						//var json=eval("("+data+")");
             						alert(data.tip);
             						$("#table").datagrid("reload");
             					}
-            							
             				})
                           }
                 });

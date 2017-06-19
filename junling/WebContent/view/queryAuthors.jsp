@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>查询作者</title>
+<title>作者管理</title>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.min.js"></script>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/plugins/jquery.validatebox.js"></script>
@@ -13,64 +13,76 @@
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/default/easyui.css">
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
 <script type="text/javascript">
-$(function(){
-	$("#table").datagrid({
-		pagination:true
-	});
-	var p=$("#table").datagrid('getPager');
-	 $(p).pagination({
-		total:200,
-		pageSize:10,
-		pageList:[10,20,30,50],
-		beforePageText:'第',
-		afterPageText:'页   共{pages}页',
-		displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
-		onSelectPage:function(pageNumber,pageSize){
-			
-			alert("当前页："+pageNumber+"每页条数:"+pageSize)
-		}
-		
-	}) 
-	$("#add").click(function(){
-			$("#updateForm").form("clear");
-			$("#updateDlg").dialog("open").dialog("setTitle","增加用户信息");
-			$("#saveUrl").val("/junling/user/insertUser.action");
-			$("#uusername").textbox({
-				readonly:false,
-				required:false
-			});
-			
+	$(function(){
+		$("#table").datagrid({
+			pagination:true
 		});
-	
-	
-	
-	
-	$("#delete").click(function(){
-			var rows=$("#table").datagrid("getSelections");
-			if(rows.length>0){
-				var idArr=new Array();
-				$.each(rows,function(index,row){
-					//将值放入数组里面
-					idArr.push(row.uId);
-				})
+		var p=$("#table").datagrid('getPager');
+		 $(p).pagination({
+			total:200,
+			pageSize:10,
+			pageList:[10,20,30,50],
+			beforePageText:'第',
+			afterPageText:'页   共{pages}页',
+			displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+			onSelectPage:function(pageNumber,pageSize){
 				
-				$.ajax({
-					url:"/junling/user/deleteUser.action",
-					type:"post",
-					dataType:"json",
-					data:{
-						uId:idArr.toString()
-					},
-					success:function(data){
-						alert(data.tip);
-						$("#table").datagrid("reload");
-					}
-							
-				})
-			}else{
-				alert("are you delete");
+				alert("当前页："+pageNumber+"每页条数:"+pageSize)
 			}
-		})
+			
+		}) 
+		$("#add").click(function(){
+				$("#updateForm").form("clear");
+				$("#updateDlg").dialog("open").dialog("setTitle","增加用户信息");
+				$("#saveUrl").val("/junling/user/insertUser.action");
+				$("#uusername").textbox({
+					readonly:false,
+					required:false
+				});
+				
+			});
+		 $("#update").click(function(){
+				//获取选中行，如果选中了多行，则获取的是第一个选中行
+					var row=$("#table").datagrid("getSelected");
+					$("#uusername").textbox({
+						readonly:true
+					});
+					$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
+					$("#saveUrl").val("/junling/user/updateUser.action");
+					//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
+					$("#updateForm").form("load",row);
+				});
+		
+		$("#delete").click(function(){
+				var rows=$("#table").datagrid("getSelections");
+				if(rows.length>0){
+					var idArr=new Array();
+					$.each(rows,function(index,row){
+						//将值放入数组里面
+						idArr.push(row.uId);
+					})
+					$.messager.confirm("提示",'确认删除选中作者吗?',function(a){
+                     if (a){
+                    		$.ajax({
+            					url:"/junling/user/deleteUser.action",
+            					type:"post",
+            					dataType:"json",
+            					data:{
+            						"ids":idArr.toString(),
+            					},
+            					success:function(data){
+            						//var json=eval("("+data+")");
+            						alert(data.tip);
+            						$("#table").datagrid("reload");
+            					}
+            							
+            				})
+                          }
+                });
+				}else{
+					alert("are you delete");
+				}
+			})
 })
 function update(){
 	
@@ -99,10 +111,10 @@ function closeDlg(){
 </script>
 </head>
 <body>
-	<input type="button" value="修改" id="update">
-	<input type="button" value="增加" id="add">
-	<input type="button" value="删除" id="delete">
-<table id="table" singleSelect="true" class="easyui-datagrid"  url="/junling/user/queryUsers.action"   method="post">
+	<input type="button" value="修改作者信息" id="update">
+	<input type="button" value="增加作者" id="add">
+	<input type="button" value="删除作者" id="delete">
+<table id="table"  class="easyui-datagrid"  url="/junling/user/queryAuthors.action"   method="post">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true" width="80"></th>
@@ -183,6 +195,5 @@ function closeDlg(){
 		</form>
 		
 	</div>
-	
 </body>
 </html>
