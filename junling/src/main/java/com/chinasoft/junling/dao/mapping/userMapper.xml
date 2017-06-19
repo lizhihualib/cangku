@@ -18,23 +18,32 @@
   	<result column="login_lID" property="login_lID"/>
   </resultMap>
   <select id="queryAuthors" resultMap="usersResults" parameterType="users">
-  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=2
+  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=2 limit #{star},#{pageSize}
+  </select>
+  <select id="count" resultType="int" parameterType="users">
+  	select count(*) from users u left join login l on u.login_lID=l.lID where l.uType=2  
   </select>
  
+ <select id="count1" resultType="int" parameterType="users">
+  	select count(*) from users u left join login l on u.login_lID=l.lID where l.uType=3 
+  </select>
    <select id="queryReaders" resultMap="usersResults" parameterType="users">
-  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=3
+  	select u.* from users u left join login l on u.login_lID=l.lID where l.uType=3 limit #{star},#{pageSize}
   </select>
  
   <insert id="insertUser">
   	insert into users(uId,uRealName,uSex,uBirthday,uPhone,uEmail,uPenName,uBeans,uBankCard,uSignState,uUploadNumbers,login_lID) values(#{uId},#{uRealName},#{uSex},#{uBirthday},#{uPhone},#{uEmail},#{uPenName},#{uBeans},#{uBankCard},#{uSignState},#{uUploadNumbers},#{login_lID}) 
   </insert>
   
-  <delete id="deleteUser" parameterType="java.lang.String">
-  	delete from users where uId in(#{_parameter})
+  <delete id="deleteUser">
+  	delete from users where uId in
+  	<foreach collection="array" item="uId" separator="," open="(" close=")">
+  		#{uId}
+  	</foreach>
   </delete>
   
   <update id="updateUser" parameterType="users" >
-  	update users set uRealName=#{uRealName},uSex=#{uSex},uBirthday=#{uBirthday},uPhone=#{uPhone},uEmail=#{uEmail},uPenName=#{},uBeans=#{uBeans},uBankCard=#{uBankCard},uBankCard=#{uBankCard},uSignState=#{uSignState},uUploadNumbers=#{uUploadNumbers},login_lID=#{login_lID} where uId=#{uId}
+  	update users set uRealName=#{uRealName},uSex=#{uSex},uBirthday=#{uBirthday},uPhone=#{uPhone},uEmail=#{uEmail},uPenName=#{uPenName},uBeans=#{uBeans},uBankCard=#{uBankCard},uBankCard=#{uBankCard},uSignState=#{uSignState},uUploadNumbers=#{uUploadNumbers},login_lID=#{login_lID} where uId=#{uId}
   </update>
   
   
