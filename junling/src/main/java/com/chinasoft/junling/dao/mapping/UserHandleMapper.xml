@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    <mapper namespace="com.chinasoft.junling.dao.UserHandleDao">
- 	<resultMap type="books" id="booksResults1">
+ 	<resultMap id="booksResults1" type="books" >
  		<id column="bId" property="bId"/>
  		<result column="bName" property="bName"/>
  		<result column="bType" property="bType"/>
@@ -17,8 +17,8 @@
  		
  		
  	</resultMap>
- 	 <select id="queryCollect"  resultMap="booksResults1">
- 		select * from books;
+ 	 <select id="queryCollect"  resultMap="booksResults1" >
+ 		select * from books
  	</select>
  	
  	</mapper>

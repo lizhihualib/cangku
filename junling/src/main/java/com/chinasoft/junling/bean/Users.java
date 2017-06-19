@@ -3,10 +3,10 @@ package com.chinasoft.junling.bean;
 import java.util.Date;
 
 public class Users {
- private int uId;
+private int uId;
  private String uRealName;
  private String uSex;
- private Date uBirthday;
+ private String uBirthday;
  private String uPhone;
  private String uEmail;
  private String uPenName;
@@ -14,6 +14,7 @@ public class Users {
  private String uBankCard;
  private String uSignState;//签到状态
  private String uUploadNumbers;//上传数量
+ private String login_lID;
 public int getuId() {
 	return uId;
 }
@@ -32,10 +33,10 @@ public String getuSex() {
 public void setuSex(String uSex) {
 	this.uSex = uSex;
 }
-public Date getuBirthday() {
+public String getuBirthday() {
 	return uBirthday;
 }
-public void setuBirthday(Date uBirthday) {
+public void setuBirthday(String uBirthday) {
 	this.uBirthday = uBirthday;
 }
 public String getuPhone() {
@@ -85,6 +86,12 @@ public String toString() {
 	return "Users [uId=" + uId + ", uRealName=" + uRealName + ", uSex=" + uSex + ", uBirthday=" + uBirthday
 			+ ", uPhone=" + uPhone + ", uEmail=" + uEmail + ", uPenName=" + uPenName + ", uBeans=" + uBeans
 			+ ", uBankCard=" + uBankCard + ", uSignState=" + uSignState + ", uUploadNumbers=" + uUploadNumbers + "]";
+}
+public String getLogin_lID() {
+	return login_lID;
+}
+public void setLogin_lID(String login_lID) {
+	this.login_lID = login_lID;
 }
  
 }

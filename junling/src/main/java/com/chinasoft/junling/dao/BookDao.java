@@ -1,8 +1,10 @@
 package com.chinasoft.junling.dao;
 
 
+import java.util.List;
+
 import com.chinasoft.junling.bean.Books;
 
 public interface BookDao {
-	Books queryBooks(Books books);
+	List<Books> queryBooks(Books books);
 }
