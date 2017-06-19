@@ -55,11 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<input id="delete" type="button" value="删除" style="margin-bottom: 5px;">
 	<table id="table" class="easyui-datagrid" style="width:1000px;height:250px;"
-    data-options="url:'<%=basePath%>UserHandle/queryCollectBooks.action'">
+    data-options="url:'<%=basePath%>UserHandle/queryCollectBooks.action?lID=${sessionScope.loginBean.getlID()}'">
 	    <thead>
 			<tr>
 				<th data-options="field:'ck',width:100" checkbox="true"></th>
-				<th data-options="field:'bId',width:100">id</th>
+				<th data-options="field:'bId',width:100" hidden="true">id</th>
 				<th data-options="field:'bName',width:100">书名</th>
 				<th data-options="field:'bType',width:100">类型</th>
 				<th data-options="field:'bState',width:100">状态</th>

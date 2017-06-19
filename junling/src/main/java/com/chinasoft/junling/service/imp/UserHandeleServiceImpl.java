@@ -15,8 +15,8 @@ public class UserHandeleServiceImpl implements UserHandleService{
 	@Resource
 	private UserHandleDao userHandleDao;
 	@Override
-	public List<Books> query() {
-		List<Books> listBooks = userHandleDao.queryCollect();
+	public List<Books> query(String lID) {
+		List<Books> listBooks = userHandleDao.queryCollect(lID);
 		return listBooks;
 		
 		
