@@ -43,15 +43,29 @@ public class LoginServiceImp implements ILoginService{
 	}
 
 	@Override
-	public List<Login> findAll(String type) {
+	public List<Login> findAll(Login login) {
 		// TODO Auto-generated method stub
-		return loginDao.findAll(type);
+		return loginDao.findAll(login);
 	}
 
 	@Override
-	public Login findById(int id) {
+	public int findByName(Login login) {
 		// TODO Auto-generated method stub
-		return null;
+		return loginDao.findByName(login);
 	}
+
+	@Override
+	public String total(Login login) {
+		// TODO Auto-generated method stub
+		return loginDao.total(login);
+	}
+
+	@Override
+	public int idCount(Login login) {
+		// TODO Auto-generated method stub
+		return loginDao.idCount(login);
+	}
+
+
 
 }

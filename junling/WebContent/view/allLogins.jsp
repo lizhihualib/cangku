@@ -24,19 +24,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//通过table标签得的一个分页插件
 		var pp=$("#table").datagrid("getPager");
 		$(pp).pagination({			
-			pageSize:10,
+			pageSize:5,
 			pageList:[2,3,5,10],
 			beforePageText:"第",	
 			afterPageText:"页    共{pages}页",
 			displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',  
 			onSelectPage:function(curPage,pageSize){
 				var data={
-					/* 	curPage:curPage,
-						pageSize:pageSize, */
+						curPage:curPage,
+						pageSize:pageSize, 
 						"uType":$("#quserType").val(),
 					
 					
 				}
+		
 				//发送ajax请求
 				//$("#table").datagrid("reload",data);
 				$.ajax({
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   $("#update").click(function(){
 			//获取选中行，如果选中了多行，则获取的是第一个选中行
 			var row=$("#table").datagrid("getSelected");
-			$("#uusername").textbox({
+			$("#uuName").textbox({
 				readonly:'readonly'
 			});
 			$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
@@ -140,15 +141,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			          	return $(this).form('validate');
 			        },
 					success:function(data){
-						var json=eval("("+data+")");
+				      var json=eval("("+data+")");
 						alert(json.tip);
-						$("#updateDlg").dialog("close");
-						$("#table").datagrid("reload");
+						
+						$("#updateDlg").dialog("close"); 
+			             $('#table').datagrid('reload');
 					}
 			
 				});
+		
 	   }
 	//如果ID为空进入添加操作
+	else{
 	   $.ajax({
            type:"post",
            url:$("#saveUrl").val(),
@@ -166,9 +170,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
            }
          })  
-		
 	}
 
+   }
    	function closeDlg(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("close");

@@ -8,24 +8,40 @@
  		<result column="uName" property="uName"/>
  		<result column="uPwd" property="uPwd"/>
  		<result column="uType" property="uType" />
- 
+  
  	</resultMap>
  	 <select id="queryLogin" parameterType="login" resultMap="loginResults">
  		
  		select * from login 
  		where uName=#{uName} and uPwd=#{uPwd} and uType=#{uType}
  	</select>
- 	<select id="findById" parameterType="java.lang.String" resultMap="loginResults">
- 		select * from login where lID=#{_parameter}
+ 		 <select id="idCount" parameterType="login" resultType="java.lang.Integer">
+ 		
+ 		select count(*) from login 
+ 		where uName=#{uName} and uPwd=#{uPwd} and uType=#{uType}
  	</select>
- 	 <select id="findAll" parameterType="java.lang.String" resultMap="loginResults">
+ 	<select id="findByName" parameterType="login" resultType="java.lang.Integer">
+ 		select count(*) from login where uName=#{uName}
+ 	</select>
+ 	 <select id="findAll" parameterType="login" resultMap="loginResults">
  		select * from login 
  		      <where>
-            <if test="_parameter!=null and _parameter!=''">  
-                 uType= #{_parameter} 
+            <if test="uType!=null and uType!=''">  
+                 uType= #{uType} 
             </if>
-
+            
         </where>
+        limit #{star},#{pageSize}
+ 	</select>
+ 		 <select id="total" parameterType="login" resultType="java.lang.String">
+ 		select count(*) from login 
+ 		      <where>
+            <if test="uType!=null and uType!=''">  
+                 uType= #{uType} 
+            </if>
+            
+        </where>
+       
  	</select>
  	 	<!-- useGeneratedKeys="true" keyProperty="uid" 表示在插入成功后，会将插入数据后的id返回给login对象 -->
  	<insert id="insertLogin" parameterType="login" useGeneratedKeys="true" keyProperty="id" >

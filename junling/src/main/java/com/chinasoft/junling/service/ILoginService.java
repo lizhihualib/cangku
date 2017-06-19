@@ -5,10 +5,12 @@ import java.util.List;
 import com.chinasoft.junling.bean.Login;
 
 public interface ILoginService {
+	  int idCount(Login login);
      Login queryLogin(Login login);
      boolean insertLogin(Login login);
      boolean updateLogin(Login login);
      boolean deleteLogin(String ids);
-     Login findById(int id);
-     List <Login> findAll(String type);
+     int findByName(Login login);
+     String total(Login login);
+     List <Login> findAll(Login login);
 }
