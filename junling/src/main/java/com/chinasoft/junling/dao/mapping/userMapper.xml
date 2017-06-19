@@ -34,7 +34,7 @@
   </delete>
   
   <update id="updateUser" parameterType="users" >
-  	update users set uRealName=#{uRealName},uSex=#{uSex},uBirthday=#{uBirthday},uPhone=#{uPhone},uEmail=#{uEmail},uPenName=#{},uBeans=#{uBeans},uBankCard=#{uBankCard},uBankCard=#{uBankCard},uSignState=#{uSignState},uUploadNumbers=#{uUploadNumbers},login_lID=#{login_lID} where uId=#{uId}
+  	update users set uRealName=#{uRealName},uSex=#{uSex},uBirthday=#{uBirthday},uPhone=#{uPhone},uEmail=#{uEmail},uPenName=#{uPenName},uBeans=#{uBeans},uBankCard=#{uBankCard},uBankCard=#{uBankCard},uSignState=#{uSignState},uUploadNumbers=#{uUploadNumbers},login_lID=#{login_lID} where uId=#{uId}
   </update>
   
   
