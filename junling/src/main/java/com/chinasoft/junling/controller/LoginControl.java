@@ -1,15 +1,16 @@
 package com.chinasoft.junling.controller;
 
 import java.io.IOException;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
-import org.springframework.core.annotation.SynthesizedAnnotation;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.chinasoft.junling.bean.Login;
 import com.chinasoft.junling.service.ILoginService;
 
-
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+
 
 
 /** 
@@ -47,13 +46,28 @@ public class LoginControl {
        //在Session里保存信息 
 
 
-       session.setAttribute("login", loginBean);
+       session.setAttribute("loginBean", loginBean);
+       session.setAttribute("uType",loginBean.getuType());
        System.out.println(loginBean.getlID());
       if(loginBean.getlID()!=0){ 
       //重定向 
     	  return "view/center"; 
     	  }else
      return "view/main"; 
+        
+
+ } 
+ /** 
+  * to主页
+  * @param session 
+  *   HttpSession 
+  * @return 
+  */
+ @RequestMapping(value="/toCenter") 
+ public String toCenter(HttpSession session,Login login) {  
+	    String uType=  (String) session.getAttribute("uType");
+	      System.out.println("==="+uType);
+     return "view/center"; 
         
 
  } 
@@ -70,7 +84,7 @@ public class LoginControl {
   //清除Session 
   session.invalidate(); 
     
-  return "view/main"; 
+  return "view/login"; 
  } 
  /**  
   * 获取所有用户列表  
@@ -80,19 +94,16 @@ public class LoginControl {
   */  
  @RequestMapping("/getAllLogins") 
  @ResponseBody
- public JSONObject getAllUser(String uType) throws IOException{  
+ public Map getAllUser(String uType) throws IOException{  
       System.out.println(uType);
 	 List<Login> logins = loginService.findAll(uType); 
        for (Login login : logins) {
 		System.out.println(login.toString());
 	}
-		JsonConfig config=new JsonConfig();
-			
-		JSONObject json=new JSONObject();
-		json.put("rows", JSONArray.fromObject(logins, config));
-		System.out.println(json.toString());
-	
-     return json;  
+	 Map map=new HashMap<String,Object>();
+		map.put("rows", logins);
+	    map.put("total", 200);
+     return map;  
  }  
 
  /**  
@@ -126,6 +137,7 @@ public class LoginControl {
  @ResponseBody
  public  JSONObject updateLogin(Login login){ 
 	 JSONObject json=new JSONObject();
+	 System.out.println(login);
      if(loginService.updateLogin(login)){    
           
     	 json.put("status", 1);

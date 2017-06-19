@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//获取选中行，如果选中了多行，则获取的是第一个选中行
 			var row=$("#table").datagrid("getSelected");
 			$("#uusername").textbox({
-				readonly:true
+				readonly:'readonly'
 			});
 			$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
 			$("#saveUrl").val("<%=basePath%>login/updateLogin.action");
@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //添加修改的保存按钮
    	function update(){
 	//如果Id不为空进入修改操作
-	   if($("#uid").val()!=""){
+	   if($("#ulID").val()!=""){
 		$("#updateForm").form("submit",
 				{
 					url:$("#saveUrl").val(),
@@ -199,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
-			<input type="hidden" name="id" id="uid">
+			<input type="hidden" name="lID" id="ulID">
 			<table align="center">
 				<tr>
 					<td><label>用户名：</label></td>
