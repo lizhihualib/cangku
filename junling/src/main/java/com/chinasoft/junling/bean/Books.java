@@ -3,6 +3,13 @@ package com.chinasoft.junling.bean;
 import java.util.Date;
 
 public class Books {
+	private Users users;
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
 	private int bId;
 	private String bName;
 	private String bType;
@@ -10,9 +17,10 @@ public class Books {
 	private String bIntro;
 	private int bClicks;
 	private String bDownloads;
-	private Date bEdittime;
-	private Date bOverTime;
+	private String bEdittime;
+	private String bOverTime;
 	private int users_uId;
+	
 	public int getbId() {
 		return bId;
 	}
@@ -55,16 +63,16 @@ public class Books {
 	public void setbDownloads(String bDownloads) {
 		this.bDownloads = bDownloads;
 	}
-	public Date getbEdittime() {
+	public String getbEdittime() {
 		return bEdittime;
 	}
-	public void setbEdittime(Date bEdittime) {
+	public void setbEdittime(String bEdittime) {
 		this.bEdittime = bEdittime;
 	}
-	public Date getbOverTime() {
+	public String getbOverTime() {
 		return bOverTime;
 	}
-	public void setbOverTime(Date bOverTime) {
+	public void setbOverTime(String bOverTime) {
 		this.bOverTime = bOverTime;
 	}
 	public int getUsers_uId() {

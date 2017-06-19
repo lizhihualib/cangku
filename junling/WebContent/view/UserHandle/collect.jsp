@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.min.js"></script>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/plugins/jquery.validatebox.js"></script>
@@ -11,11 +13,20 @@
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/default/easyui.css">
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
-<title>Insert title here</title>
+<script type="text/javascript">
+	$(function(){
+		$("#add").click(function(){
+			alert("hahah");
+			});
+	})
+</script>
 </head>
 <body>
-	<table class="easyui-datagrid" style="width:800px;height:250px;"
-    data-options="url:'datagrid_data.json',fitColumns:true">
+	<input id="add" type="button" value="添加" style="margin-bottom: 5px;">
+	<input id="update" type="button" value="修改">
+	<input id="delete" type="button" value="删除">
+	<table class="easyui-datagrid" style="width:1000px;height:250px;"
+    data-options="url:'/junling/UserHandle/queryCollectBooks.action'">
     <thead>
 		<tr>
 			<th data-options="field:'ck',width:100" checkbox="true"></th>
@@ -32,7 +43,10 @@
 			
 		</tr>
     </thead>
-</table>
+    
+
+		
+
 
 </body>
 </html>

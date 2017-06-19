@@ -24,19 +24,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//通过table标签得的一个分页插件
 		var pp=$("#table").datagrid("getPager");
 		$(pp).pagination({			
-			pageSize:10,
+			pageSize:5,
 			pageList:[2,3,5,10],
 			beforePageText:"第",	
 			afterPageText:"页    共{pages}页",
 			displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录',  
 			onSelectPage:function(curPage,pageSize){
 				var data={
-					/* 	curPage:curPage,
-						pageSize:pageSize, */
+						curPage:curPage,
+						pageSize:pageSize, 
 						"uType":$("#quserType").val(),
 					
 					
 				}
+		
 				//发送ajax请求
 				//$("#table").datagrid("reload",data);
 				$.ajax({
@@ -56,8 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   $("#update").click(function(){
 			//获取选中行，如果选中了多行，则获取的是第一个选中行
 			var row=$("#table").datagrid("getSelected");
-			$("#uusername").textbox({
-				readonly:true
+			$("#uuName").textbox({
+				readonly:'readonly'
 			});
 			$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
 			$("#saveUrl").val("<%=basePath%>login/updateLogin.action");
@@ -127,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 //添加修改的保存按钮
    	function update(){
 	//如果Id不为空进入修改操作
-	   if($("#uid").val()!=""){
+	   if($("#ulID").val()!=""){
 		$("#updateForm").form("submit",
 				{
 					url:$("#saveUrl").val(),
@@ -138,15 +139,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			          	return $(this).form('validate');
 			        },
 					success:function(data){
-						var json=eval("("+data+")");
+				      var json=eval("("+data+")");
 						alert(json.tip);
-						$("#updateDlg").dialog("close");
-						$("#table").datagrid("reload");
+						
+						$("#updateDlg").dialog("close"); 
+			             $('#table').datagrid('reload');
 					}
 			
 				});
+		
 	   }
 	//如果ID为空进入添加操作
+	else{
 	   $.ajax({
            type:"post",
            url:$("#saveUrl").val(),
@@ -164,9 +168,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
            }
          })  
-		
 	}
 
+   }
    	function closeDlg(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("close");
@@ -197,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
-			<input type="hidden" name="id" id="uid">
+			<input type="hidden" name="lID" id="ulID">
 			<table align="center">
 				<tr>
 					<td><label>用户名：</label></td>

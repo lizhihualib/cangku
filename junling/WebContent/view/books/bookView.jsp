@@ -14,13 +14,22 @@
 	
 	
 	
-	<table class="easyui-datagrid" style="width:400px;height:250px"
-	    data-options="url:'datagrid_data.json',fitColumns:true,singleSelect:true">
+	<table id="table" singleSelect="true" class="easyui-datagrid"  url="/junling/book/querybooks.action"   method="post">
 	    <thead>
 			<tr>
-				<th data-options="field:'code',width:100">Code</th>
-				<th data-options="field:'name',width:100">Name</th>
-				<th data-options="field:'price',width:100">Price</th>
+			    <th field="ck" checkbox="true" width="80"></th>
+				<th data-options="field:'bId',width:100">小说ID</th>
+				<th data-options="field:'bName',width:100">小说名</th>
+				
+				<th data-options="field:'bType',width:100">小说类型</th>
+				<th data-options="field:'bState',width:100">小说状态</th>
+				<th data-options="field:'bIntro',width:100">简介</th>
+				<th data-options="field:'bClicks',width:100">点击量</th>
+				<th data-options="field:'bDownloads',width:100">下载量</th>
+				<th data-options="field:'bEdittime',width:100">最近上传时间</th>
+				<th data-options="field:'bOverTime',width:100">完结时间</th>
+				<th data-options="field:'uPenName',width:100">作者</th>
+				
 			</tr>
 	    </thead>
 	</table>

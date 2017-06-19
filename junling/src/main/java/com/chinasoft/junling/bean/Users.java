@@ -3,7 +3,7 @@ package com.chinasoft.junling.bean;
 import java.util.Date;
 
 public class Users {
- private int uId;
+private int uId;
  private String uRealName;
  private String uSex;
  private String uBirthday;

@@ -41,6 +41,7 @@ public class UsersController {
 	@ResponseBody
 	 public Map queryReaders(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
+
 		List<Users> rows=userService.queryReaders(users);
 		map.put("total",200);
 		map.put("rows", rows);

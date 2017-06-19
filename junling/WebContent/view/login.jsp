@@ -31,6 +31,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#loginForm').form('clear');
         }
         function login() {
+        	if($("#uType").val()==""){
+        		alert("请选择身份")
+        		return false;
+        	}
             if ($("input[name='uName']").val() == "" || $("input[name='uPwd']").val() == "") {
                 $("#showMsg").html("用户名或密码为空，请输入");
                 $("input[name='uName']").focus();
@@ -44,7 +48,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         $("#showMsg").html(request);  //登录错误提示信息
                     },
                     success: function (data) {
-                       document.location = "toCenter.acion";
+                        if(data.status==1){
+                       document.location = "<%=basePath%>login/toCenter.action";
+                        }
+                        else{
+                        	alert(data.tip)
+                        	
+                        }
                     }
                 });
             }
@@ -80,6 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div region="south" border="false" style="text-align:right;padding:5px 0;">
                 <a class="easyui-linkbutton" iconcls="icon-ok" href="javascript:void(0)" onclick="login()">登录</a>
+                <a class="easyui-linkbutton" iconcls="icon-add" href="<%=basePath%>view/register.jsp" >注册</a>
                  <a class="easyui-linkbutton" iconcls="icon-help" href="javascript:void(0)" >忘记密码</a>
             </div>
         </div>
