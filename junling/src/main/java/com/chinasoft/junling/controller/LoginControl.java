@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 
-
+import org.springframework.core.annotation.SynthesizedAnnotation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,23 +37,28 @@ public class LoginControl {
   *   HttpSession 
   * @return 
   */
- @RequestMapping(value="/login") 
- public String login(HttpSession session,Login login) throws Exception{  
-	 System.out.println("lalalalalal");
+ @RequestMapping(value="/login")
+ @ResponseBody
+ public JSONObject login(HttpSession session,Login login) throws Exception{  
+	 
   System.out.println(login.toString());
   
-       Login loginBean= loginService.queryLogin(login);
-       //在Session里保存信息 
-
-
-       session.setAttribute("loginBean", loginBean);
-       session.setAttribute("uType",loginBean.getuType());
-       System.out.println(loginBean.getlID());
-      if(loginBean.getlID()!=0){ 
-      //重定向 
-    	  return "view/center"; 
-    	  }else
-     return "view/main"; 
+    int idCount=loginService.idCount(login);
+       JSONObject json=new JSONObject();
+      if(idCount>0){ 
+          Login loginBean= loginService.queryLogin(login);
+          //在Session里保存信息 
+         
+    	  session.setAttribute("loginBean", loginBean);
+          session.setAttribute("uType",loginBean.getuType());
+          System.out.println(loginBean.getlID());
+     	    json.put("status", 1);
+    	    json.put("tip", "登陆成功"); 
+     }else{  
+    	    json.put("status", 0);
+    	    json.put("tip", "账号或密码错误");
+        }  
+     return json; 
         
 
  } 
@@ -94,15 +99,18 @@ public class LoginControl {
   */  
  @RequestMapping("/getAllLogins") 
  @ResponseBody
- public Map getAllUser(String uType) throws IOException{  
-      System.out.println(uType);
-	 List<Login> logins = loginService.findAll(uType); 
+ public Map getAllUser(Login querylogin) throws IOException{  
+      System.out.println(querylogin.getCurPage());
+      System.out.println("Star="+querylogin.getStar());
+         System.out.println("page="+querylogin.getPageSize());
+	 List<Login> logins = loginService.findAll(querylogin); 
        for (Login login : logins) {
 		System.out.println(login.toString());
 	}
+      String total= loginService.total(querylogin);
 	 Map map=new HashMap<String,Object>();
 		map.put("rows", logins);
-	    map.put("total", 200);
+	    map.put("total", total);
      return map;  
  }  
 
@@ -115,18 +123,27 @@ public class LoginControl {
  @RequestMapping("/insertLogin") 
  @ResponseBody
  public JSONObject insertLogin(Login login){  
+	int countByName= loginService.findByName(login);
+
 	 JSONObject json=new JSONObject();
-	 System.out.println("++++++++");
+	 if(countByName>0){
+		 json.put("status",3);
+		 json.put("tip", "该用户已存在");
+		 return json;
+       }
+	 
 	 System.out.println("添加"+login.toString());
-    if( loginService.insertLogin(login)){
-   	    json.put("status", 1);
-	    json.put("tip", "添加成功"); 
- }else{  
-	 json.put("status", 0);
-	 json.put("tip", "添加失败");
-    }  
-     return json;  
- }  
+	    if( loginService.insertLogin(login)){
+	   	    json.put("status", 1);
+		    json.put("tip", "添加成功"); 
+	 }else{  
+		 json.put("status", 0);
+		 json.put("tip", "添加失败");
+	    }  
+	     return json;  
+	 
+ }
+ 
  /**  
   *修改用户  
   * @param user  
@@ -148,18 +165,7 @@ public class LoginControl {
      } 
      return json;
  }  
- /**  
-  * 根据id查询单个用户  
-  * @param id  
-  * @param request  
-  * @return  
-  */  
- @RequestMapping("/getLogin")  
- public String getUser(int id,HttpServletRequest request,Model model){  
-     request.setAttribute("login", loginService.findById(id));  
-     model.addAttribute("login", loginService.findById(id));  
-     return "/editLogin";  
- }  
+
  /**  
   * 删除用户  
   * @param id  
@@ -181,7 +187,6 @@ public class LoginControl {
      }
 	return json;  
       
-   
  }  
    
    
