@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    <mapper namespace="com.chinasoft.junling.dao.UserHandleDao">
- 	<resultMap id="booksResults1" type="books" >
+ 	 <resultMap id="booksResults1" type="books" >
  		<id column="bId" property="bId"/>
  		<result column="bName" property="bName"/>
  		<result column="bType" property="bType"/>
@@ -16,9 +16,16 @@
  		<result column="users_uId" property="users_uId"/>
  		
  		
- 	</resultMap>
+ 	 </resultMap>
  	 <select id="queryCollect"  resultMap="booksResults1" >
  		select * from books
- 	</select>
+ 	 </select>
+ 	 <delete id="deleteCollect" parameterType="int">
+ 	 	delete from books where bID in(
+			<foreach collection="array" separator="," item="did">
+				#{did}
+			</foreach>
+		)
+ 	 </delete>
  	
- 	</mapper>
+ </mapper>

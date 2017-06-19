@@ -30,14 +30,28 @@ import net.sf.json.JsonConfig;
 @RequestMapping("/UserHandle")
 public class UserHandle {
 	@Resource
-	private UserHandleService userHandleInterface;
+	private UserHandleService UserHandeleServiceImpl;
 	@RequestMapping("/queryCollectBooks")
 	@ResponseBody
 	public Map queryCollectBooks(HttpServletRequest req,HttpServletResponse resp) throws IOException{
-		List<Books> list = userHandleInterface.query();
+		List<Books> list = UserHandeleServiceImpl.query();
 		Map map=new HashMap<>();
 		map.put("rows", list);
 		return map;
 	}
-
+	 @RequestMapping("/deleteCollectBooks") 
+	 @ResponseBody
+	public JSONObject deleteCollectBooks(HttpServletRequest req,HttpServletResponse resp,int[] ids) throws IOException{
+		 JSONObject json=new JSONObject();
+		 System.out.println(ids);
+	     if(UserHandeleServiceImpl.delete(ids)){  
+	    	 json.put("status", 1);
+			 json.put("tip", "删除成功"); 
+	     }
+	     else {
+	    	 json.put("status", 0);
+			 json.put("tip", "删除失败"); 
+	     }
+		return json;  
+	}
 }

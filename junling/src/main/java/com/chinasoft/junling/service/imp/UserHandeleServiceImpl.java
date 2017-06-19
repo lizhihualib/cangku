@@ -28,16 +28,17 @@ public class UserHandeleServiceImpl implements UserHandleService{
 		
 	}
 
-	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean delete(int[] ids) {
+		// TODO Auto-generated method stub
+		return userHandleDao.deleteCollect(ids);
 	}
 
 }
