@@ -13,9 +13,15 @@ import com.chinasoft.junling.service.IUsersService;
 public class UserServiceImpl implements IUsersService{
 	@Resource
 	private UsersDao usersdao;
+	
 	@Override
-	public Users queryUser(Users users) {
-		return usersdao.queryUser(users);
+	public List<Users> queryAuthors(Users users) {
+		return usersdao.queryAuthors(users);
+	}
+
+	@Override
+	public List<Users> queryReaders(Users users) {
+		return usersdao.queryReaders(users);
 	}
 
 	@Override
@@ -33,10 +39,7 @@ public class UserServiceImpl implements IUsersService{
 		return usersdao.updateUser(users);
 	}
 
-	@Override
-	public List<Users> queryUsers(Users users) {
-		
-		return usersdao.queryUsers(users);
-	}
+
+	
 
 }
