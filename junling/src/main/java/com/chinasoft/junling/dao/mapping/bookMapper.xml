@@ -19,12 +19,16 @@
   </resultMap>
   
   <select id="queryBooks" parameterType="books" resultMap="booksResults">
- 		
  		select bId,bName,bType,bState,bIntro,bClicks,bDownloads,bEdittime,bOvertime,uPenName 
         from books b left join users u on b.users_uId=u.uId 
- 		
   </select>
   
+  <delete id="deleteBooks" >
+  		delete from books where bId in
+  		<foreach collection="array" item="id" separator="," open="(" close=")">
+ 			#{id}
+ 		</foreach>
+  </delete>
   </mapper>
   
   

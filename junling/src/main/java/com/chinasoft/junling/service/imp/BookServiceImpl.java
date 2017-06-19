@@ -18,7 +18,15 @@ public class BookServiceImpl implements IBookService{
 	
 	@Override
 	public List<Books> queryBooks(Books books) {
+		System.out.println("查询： "+bookDao.queryBooks(books));
 		return bookDao.queryBooks(books);
+	}
+
+	@Override
+	public Integer deleteBooks(String id[]) {
+		Integer row=bookDao.deleteBooks(id);
+		System.out.println("删除了"+row+"行");
+		return row;
 	}
 	
 }
