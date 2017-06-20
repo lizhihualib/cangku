@@ -26,11 +26,7 @@ $(function(){
 			var data={
 					curPage:curPage,
 					pageSize:pageSize, 
-					
-				
-				
 			}
-	        alert(curPage+" "+pageSize)
 			//发送ajax请求
 			//$("#table").datagrid("reload",data);
 			$.ajax({
@@ -55,6 +51,10 @@ $(function(){
 	 $("#update").click(function(){
 			//获取选中行，如果选中了多行，则获取的是第一个选中行
 				var row=$("#table").datagrid("getSelected");
+				if(row<1){
+					alert("请选择修改用户");
+					return;
+				}
 				$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
 				$("#saveUrl").val("/junling/user/updateUser.action");
 				//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
@@ -113,30 +113,30 @@ function update(){
 	   }
 	   else{
 	$.ajax({
-        type:"post",
-        url:$("#saveUrl").val(),
-        data:{
-        	"uRealName":$("#uRealName").val(),
-        	"uSex":$("#uSex").val(),
-        	"uBirthday":$("#uBirthday").val(),
-        	"uPhone":$("#uPhone").val(),
-        	"uEmail":$("#uEmail").val(),
-        	"uPenName":$("#uPenName").val(),
-        	"uBeans":$("#uBeans").val(),
-        	"uBankCard":$("#uBankCard").val(),
-        	"uSignState":$("#uSignState").val(),
-        	"uUploadNumbers":$("#uUploadNumbers").val(),
-        	"login_lID":$("#login_lID").val(),
-  },
-        success:function(data){
-     	
-        	var json=eval("("+data+")");
+     type:"post",
+     url:$("#saveUrl").val(),
+     data:{
+     	"uRealName":$("#uRealName").val(),
+     	"uSex":$("#uSex").val(),
+     	"uBirthday":$("#uBirthday").val(),
+     	"uPhone":$("#uPhone").val(),
+     	"uEmail":$("#uEmail").val(),
+     	"uPenName":$("#uPenName").val(),
+     	"uBeans":$("#uBeans").val(),
+     	"uBankCard":$("#uBankCard").val(),
+     	"uSignState":$("#uSignState").val(),
+     	"uUploadNumbers":$("#uUploadNumbers").val(),
+     	"login_lID":$("#login_lID").val(),
+},
+     success:function(data){
+  	
+     	var json=eval("("+data+")");
 			alert(json.tip);
 			$("#updateDlg").dialog("close"); 
-          $('#table').datagrid('reload');
-   
-        }
-      })  
+       $('#table').datagrid('reload');
+
+     }
+   })  
 	}
 }
 function closeDlg(){
@@ -157,9 +157,9 @@ function closeDlg(){
 				<th field="uId"  width="80">id</th>
 				<th field="uRealName"  width="80">真实名</th>
 				<th field="uSex"  width="80">性别</th>
-				<th field="uBirthday"  width="80">出生日期</th>
+				<th field="uBirthday"  width="76">出生日期</th>
 				<th field="uPhone"  width="80">手机号码</th>
-				<th field="uEmail"  width="80">邮箱</th>
+				<th field="uEmail"  width="128">邮箱</th>
 				<th field="uPenName"  width="80">著名</th>
 				<th field="uBeans"  width="80">阅豆</th>
 				<th field="uBankCard"  width="80">银行卡号</th>
@@ -173,7 +173,7 @@ function closeDlg(){
 	<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
-			<input type="hidden" name="uId">
+			<input type="hidden" name="uId" id="uuId">
 			<table align="center">
 				<tr>
 					<td><label>真实名：</label></td>
@@ -194,7 +194,7 @@ function closeDlg(){
 				</tr>
 				<tr>
 					<td><label>邮箱：</label></td>
-					<td><input class="easyui-textbox"  name="uEmail"  id="uEmail" /></td>
+					<td><input class="easyui-validatebox"  name="uEmail"  id="uEmail" validType="email" /></td>
 				</tr>
 				<tr>
 					<td><label>著名：</label></td>

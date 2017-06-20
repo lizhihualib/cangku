@@ -32,9 +32,6 @@ public class UsersController {
 	@ResponseBody
 	 public Map queryAuthors(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
-		System.out.println(users.getPageSize());
-		System.out.println(users.getCurPage());
-		System.out.println(users.getStar());
 		List<Users> rows=userService.queryAuthors(users);
 		int count=userService.count(users);
 		map.put("total",count);
@@ -73,7 +70,6 @@ public class UsersController {
 	@RequestMapping(value="/updateUser")
 	 public void updateUser(HttpServletResponse resp,Users users) throws Exception{
 		boolean flag=userService.updateUser(users);
-		System.out.println(users);
 		JSONObject json=new JSONObject();
 		if(flag){
 			json.put("status", 1);
@@ -89,7 +85,6 @@ public class UsersController {
 	}
 	@RequestMapping(value="/deleteUser")
 	 public void deleteUser(HttpServletResponse resp,int[] uId) throws Exception{
-		System.out.println(Arrays.toString(uId));
 		boolean flag=userService.deleteUser(uId);
 		JSONObject json=new JSONObject();
 		if(flag){
