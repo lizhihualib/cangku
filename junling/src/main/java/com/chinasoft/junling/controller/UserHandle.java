@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chinasoft.junling.bean.Books;
+import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.service.UserHandleService;
 import com.chinasoft.junling.service.imp.UserHandeleServiceImpl;
 import com.chinasoft.junling.util.Date2JsonValueProcessor;
@@ -41,9 +42,9 @@ public class UserHandle {
 	}
 	 @RequestMapping("/deleteCollectBooks") 
 	 @ResponseBody
-	public JSONObject deleteCollectBooks(HttpServletRequest req,HttpServletResponse resp,int[] ids) throws IOException{
+	public JSONObject deleteCollectBooks(HttpServletRequest req,HttpServletResponse resp,int[] ids,int lID) throws IOException{
 		 JSONObject json=new JSONObject();
-	     if(UserHandeleServiceImpl.delete(ids)){  
+	     if(UserHandeleServiceImpl.delete(ids,lID)){  
 	    	 json.put("status", 1);
 			 json.put("tip", "删除成功"); 
 	     }
@@ -52,5 +53,13 @@ public class UserHandle {
 			 json.put("tip", "删除失败"); 
 	     }
 		return json;  
+	}
+	 @RequestMapping("/personalInformation")
+	 @ResponseBody
+	public Object personalInformation(HttpServletRequest req,HttpServletResponse resp,int lID) throws IOException{
+		 
+	     Users user = UserHandeleServiceImpl.personalInformation(lID);
+	     System.out.println(user.getLogin().getuName());
+		return user;  
 	}
 }
