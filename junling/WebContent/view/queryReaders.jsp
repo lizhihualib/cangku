@@ -173,7 +173,7 @@ function closeDlg(){
 	<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
 		<input type="hidden" id="saveUrl">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
-			<input type="hidden" name="uId">
+			<input type="hidden" name="uId" id="uuId">
 			<table align="center">
 				<tr>
 					<td><label>真实名：</label></td>

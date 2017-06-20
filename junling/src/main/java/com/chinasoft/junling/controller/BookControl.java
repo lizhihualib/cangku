@@ -44,4 +44,12 @@ public class BookControl {
 		Integer row=bookService.deleteBooks(ids);
 		return row;
 	}
+	
+	@RequestMapping(value="/updatebooks")
+	@ResponseBody
+	public Integer updateBooks(Books books){
+		System.out.println("接收到的数据： "+books.toString());
+		Integer row=bookService.updateBooks(books);
+		return 1;
+	}
 }

@@ -28,5 +28,16 @@ public class BookServiceImpl implements IBookService{
 		System.out.println("删除了"+row+"行");
 		return row;
 	}
+
+	@Override
+	public Integer updateBooks(Books books) {
+		Integer row=bookDao.updateBooks(books);
+		if(row==0){
+			System.out.println("修改失败！");
+		}else{
+			System.out.println("修改了一行！");
+		}
+		return row;
+	}
 	
 }

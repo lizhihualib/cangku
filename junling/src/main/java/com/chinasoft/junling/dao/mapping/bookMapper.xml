@@ -29,6 +29,12 @@
  			#{id}
  		</foreach>
   </delete>
+  
+  <update id="updateBooks" parameterType="books">
+  		update books set bName=#{bName},bType=#{bType},bState=#{bState},
+  		bIntro=#{bIntro},bClicks=#{bClicks},bDownloads=#{bDownloads},bEdittime=#{bEdittime},bOverTime=#{bOverTime} 
+  		where bId=#{bId}
+  </update>
   </mapper>
   
   
