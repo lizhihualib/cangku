@@ -174,7 +174,7 @@ public class LoginControl {
   */  
  @RequestMapping("/deleteLogin") 
  @ResponseBody
- public JSONObject deleteLogin(String ids){  
+ public JSONObject deleteLogin(int[] ids){  
 	 JSONObject json=new JSONObject();
 	 System.out.println(ids);
      if(loginService.deleteLogin(ids)){  

@@ -52,8 +52,12 @@
  		update login set uPwd=#{uPwd},uType=#{uType} where lID=#{lID}
  	</update>
  	
- 	<delete id="deleteLogin" parameterType="java.lang.String">
- 		delete from login where lID in(#{_parameter})
+ 	<delete id="deleteLogin" parameterType="int">
+ 		delete from login where lID in(
+ 		<foreach collection="array" separator="," item="lid">
+				#{lid}
+			</foreach>
+         )
  	</delete>
  	
  	</mapper>
