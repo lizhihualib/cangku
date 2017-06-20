@@ -13,14 +13,16 @@
  		<result column="bDownloads" property="bDownloads" />
  		<result column="bEdittime" property="bEdittime" />
  		<result column="bOvertime" property="bOverTime" />
- 		<association column="uId" property="users" javaType="com.chinasoft.junling.bean.Users" >
+ 		<result column="users_uId" property="users_uId"/> 
+ 		<association column="uId" property="users" javaType="users" >
+ 		   <id column="uId" property="uId"/>
 	 		<result column="uPenName" property="uPenName"/>
  		</association>
   </resultMap>
   
   <select id="queryBooks" parameterType="books" resultMap="booksResults">
- 		select bId,bName,bType,bState,bIntro,bClicks,bDownloads,bEdittime,bOvertime,uPenName 
-        from books b left join users u on b.users_uId=u.uId 
+ 		select * from books b 
+ 		    left join users u on u.uId=b.users_uId 
   </select>
   
   <delete id="deleteBooks" >

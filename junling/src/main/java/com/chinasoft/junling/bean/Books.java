@@ -2,6 +2,8 @@ package com.chinasoft.junling.bean;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Books {
 	private Users users;
 	public Users getUsers() {
@@ -9,6 +11,14 @@ public class Books {
 	}
 	public void setUsers(Users users) {
 		this.users = users;
+	}
+	private String addr;
+	
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
 	}
 	private int bId;
 	private String bName;
@@ -83,10 +93,11 @@ public class Books {
 	}
 	@Override
 	public String toString() {
-		return "Books [bId=" + bId + ", bName=" + bName + ", bType=" + bType + ", bState=" + bState + ", bIntro="
-				+ bIntro + ", bClicks=" + bClicks + ", bDownloads=" + bDownloads + ", bEdittime=" + bEdittime
-				+ ", bOverTime=" + bOverTime + ", users_uId=" + users_uId + "]";
+		return "Books [users=" + users.toString() + ", addr=" + addr + ", bId=" + bId + ", bName=" + bName + ", bType=" + bType
+				+ ", bState=" + bState + ", bIntro=" + bIntro + ", bClicks=" + bClicks + ", bDownloads=" + bDownloads
+				+ ", bEdittime=" + bEdittime + ", bOverTime=" + bOverTime + ", users_uId=" + users_uId + "]";
 	}
+	
 	
 	
 }
