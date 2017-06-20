@@ -85,6 +85,9 @@
 		})
 	}
 	
+	
+	
+	
 	function closeDlg(){
 		$("#updateForm").form("clear");
 		$("#updateDlg").dialog("close");
@@ -124,7 +127,9 @@
 			    <th field="ck" checkbox="true" width="80"></th>
 				<th data-options="field:'bId',width:100">小说ID</th>
 				<th data-options="field:'bName',width:100">小说名</th>
-				<th data-options="field:'uPenName',width:100">作者</th>
+				<th data-options="field:'users',width:100,formatter:function(users){
+				return users.uPenName;
+				}">作者</th>
 				<th data-options="field:'bType',width:100">小说类型</th>
 				<th data-options="field:'bState',width:100">小说状态</th>
 				<th data-options="field:'bIntro',width:100">简介</th>
@@ -217,22 +222,53 @@
 	
 	
 	<div id="uploadDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
-		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
+		<form  action="/junling/book/insertbooks.action" method="post" enctype="multipart/form-data" style="width:100%;height:100%" >
+			
+			<div>选择文件：<input type="file" name="file" /></div>
 			<table align="center">
-				<tr >
-					<td><label >选择文件：</label></td>
+			<tr>
+				<td><label>小说名：</label></td>
+				<td><input class="easyui-textbox" name="bName" id="lbName"  required="true"/></td>
+			</tr>
 			
-				</tr>
-				  
+			<tr>
+				<td><label>作者：</label></td>
+				<td><input class="easyui-textbox" name="uPenName"  id="luPenName" /></td>
+			</tr>
+			<tr>
+				<td><label>小说类型：</label></td>
+				<td><input class="easyui-textbox" name="bType"  id="lbType" required="true"/></td>
+			</tr>
+			<tr>
+				<td><label>小说状态：</label></td>
+				<td><input class="easyui-textbox"  name="bState"  id="lbState"  required="true"/></td>
+			</tr>
+			<tr>
+				<td><label>简介：</label></td>
+				<td><input class="easyui-textbox"  name="bIntro"  id="lbIntro"  /></td>
+			</tr>
+			<tr>
+				<td><label>点击量：</label></td>
+				<td><input class="easyui-textbox"  name="bClicks"  id="lbClicks"  /></td>
+			</tr>
+			<tr>
+				<td><label>下载量：</label></td>
+				<td><input class="easyui-textbox"  name="bDownloads"  id="lbDownloads"  /></td>
+			</tr>
+			<tr>
+				<td><label>最近上传时间：</label></td>
+				<td><input class="easyui-textbox"  name="bEdittime"  id="lbEdittime" /></td>
+			</tr>
+			<tr>
+				<td><label>完结时间：</label></td>
+				<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4"  name="bOverTime"  id="lbOverTime"  /></td>
+			</tr>
+			  
 
-		</table>
-		     <input type="file" name="file" />
-			
+		    </table>
 			<div id="update-dlg-btns" align="center">
-				<a href="javascript:void(0);" class="easyui-linkbutton" 
-				iconCls="icon-ok" onclick="update();" style="width:100px;height:30px" >保存</a>
-				<a href="javascript:void(0);" class="easyui-linkbutton" 
-				iconCls="icon-cancel" onclick="closeDlg();" style="width:100px;height:30px">取消</a>
+			<input type="submit" value="提交">
+			
 			</div>
 		</form>
 		

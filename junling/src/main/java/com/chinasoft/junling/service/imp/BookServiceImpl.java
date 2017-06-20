@@ -1,8 +1,10 @@
 package com.chinasoft.junling.service.imp;
 
+import java.io.File;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,13 @@ public class BookServiceImpl implements IBookService{
 			System.out.println("修改了一行！");
 		}
 		return row;
+	}
+
+	
+
+	@Override
+	public Integer insertBooks(File dir, HttpServletRequest req) {
+		return null;
 	}
 	
 }
