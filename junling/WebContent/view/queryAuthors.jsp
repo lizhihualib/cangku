@@ -26,11 +26,7 @@ $(function(){
 			var data={
 					curPage:curPage,
 					pageSize:pageSize, 
-					
-				
-				
 			}
-	        alert(curPage+" "+pageSize)
 			//发送ajax请求
 			//$("#table").datagrid("reload",data);
 			$.ajax({
@@ -55,6 +51,10 @@ $(function(){
 	 $("#update").click(function(){
 			//获取选中行，如果选中了多行，则获取的是第一个选中行
 				var row=$("#table").datagrid("getSelected");
+				if(row<1){
+					alert("请选择修改用户");
+					return;
+				}
 				$("#updateDlg").dialog("open").dialog("setTitle","修改用户信息");
 				$("#saveUrl").val("/junling/user/updateUser.action");
 				//直接将row里面的数据一次性赋值给有name属性的标签，并且name属性必须与row里面的属性想对应
@@ -157,9 +157,9 @@ function closeDlg(){
 				<th field="uId"  width="80">id</th>
 				<th field="uRealName"  width="80">真实名</th>
 				<th field="uSex"  width="80">性别</th>
-				<th field="uBirthday"  width="80">出生日期</th>
+				<th field="uBirthday"  width="76">出生日期</th>
 				<th field="uPhone"  width="80">手机号码</th>
-				<th field="uEmail"  width="80">邮箱</th>
+				<th field="uEmail"  width="128">邮箱</th>
 				<th field="uPenName"  width="80">著名</th>
 				<th field="uBeans"  width="80">阅豆</th>
 				<th field="uBankCard"  width="80">银行卡号</th>
@@ -194,11 +194,11 @@ function closeDlg(){
 				</tr>
 				<tr>
 					<td><label>邮箱：</label></td>
-					<td><input class="easyui-textbox"  name="uEmail"  id="uEmail" /></td>
+					<td><input class="easyui-validatebox"  name="uEmail"  id="uEmail" validType="email" required="true"/></td>
 				</tr>
 				<tr>
 					<td><label>著名：</label></td>
-					<td><input class="easyui-textbox"  name="uPenName"  id="uPenName"  /></td>
+					<td><input class="easyui-textbox"  name="uPenName"  id="uPenName"  required="true"/></td>
 				</tr>
 				<tr>
 					<td><label>阅豆：</label></td>
@@ -206,7 +206,7 @@ function closeDlg(){
 				</tr>
 				<tr>
 					<td><label>银行卡号：</label></td>
-					<td><input class="easyui-textbox"  name="uBankCard"  id="uBankCard" /></td>
+					<td><input class="easyui-textbox"  name="uBankCard"  id="uBankCard" required="true"/></td>
 				</tr>
 				<tr>
 					<td><label>签到状态：</label></td>
@@ -214,7 +214,7 @@ function closeDlg(){
 				</tr>
 				<tr>
 					<td><label>可上传本数：</label></td>
-					<td><input class="easyui-textbox"  name="uUploadNumbers"  id="uUploadNumbers"  /></td>
+					<td><input class="easyui-textbox"  name="uUploadNumbers"  id="uUploadNumbers"  required="true"/></td>
 				</tr>
 				<tr>
 					<td><label>登陆id：</label></td>
@@ -229,7 +229,6 @@ function closeDlg(){
 					iconCls="icon-cancel" onclick="closeDlg();" style="width:100px;height:30px">取消</a>
 			</div>
 		</form>
-		
 	</div>
 </body>
 </html>
