@@ -85,8 +85,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   //按身份查询
 		$("#query").click(function(){
 			var data={
-					/* curPage:$("#pp").pagination("options").pageNumber,
-					pageSize:$("#pp").pagination("options").pageSize, */
+					curPage:$("#pp").pagination("options").pageNumber,
+					pageSize:$("#pp").pagination("options").pageSize, 
 					"uType":$("#quserType").val(),
 					
 				
@@ -113,9 +113,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             						"ids":idArr.toString(),
             					},
             					success:function(data){
+            						//var json=eval("("+data+")");
             						alert(data.tip);
             						$("#table").datagrid("reload");
             					}
+            							
             				})
                           }
                 });
