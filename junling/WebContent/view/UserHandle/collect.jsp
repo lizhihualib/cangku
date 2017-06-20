@@ -20,6 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	$(function(){
 		$("#delete").click(function(){
+			alert("${sessionScope.loginBean.getlID()}");
 			var rows=$("#table").datagrid("getSelections");
 			var idArr=new Array();
 			$.each(rows,function(index,row){
@@ -34,7 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							type:"post",
 							dataType:"json",
 							data:{
-								ids:idArr.toString()
+								ids:idArr.toString(),
+								lID:"${sessionScope.loginBean.getlID()}"
 							},
 							success:function(data){
 								//var json=eval("("+data+")");
@@ -42,9 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								$("#table").datagrid("reload");
 							}
 								
-						})   
+						}) 
+						
 				    }
-				});
+				})
 			}else{
 				$.messager.alert('温馨提示','亲，你还没有选择你想要删除的收藏诶。。。');
 			}
@@ -54,6 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
 	<input id="delete" type="button" value="删除" style="margin-bottom: 5px;">
+	<input id="lID" type="button" value="${sessionScope.loginBean.getlID()}" hidden="true">
 	<table id="table" class="easyui-datagrid" style="width:1000px;height:250px;"
     data-options="url:'<%=basePath%>UserHandle/queryCollectBooks.action?lID=${sessionScope.loginBean.getlID()}'">
 	    <thead>

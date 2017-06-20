@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.chinasoft.junling.bean.Books;
+import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.dao.LoginDao;
 import com.chinasoft.junling.dao.UserHandleDao;
 import com.chinasoft.junling.service.UserHandleService;
@@ -36,9 +37,15 @@ public class UserHandeleServiceImpl implements UserHandleService{
 	}
 
 	@Override
-	public boolean delete(int[] ids) {
+	public boolean delete(int[] ids,int lID) {
 		// TODO Auto-generated method stub
-		return userHandleDao.deleteCollect(ids);
+		return userHandleDao.deleteCollect(ids,lID);
+	}
+
+	@Override
+	public Users personalInformation(int lID) {
+		// TODO Auto-generated method stub
+		return userHandleDao.queryUser(lID);
 	}
 
 }

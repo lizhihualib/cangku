@@ -15,6 +15,13 @@ private int uId;
  private String uSignState;//签到状态
  private String uUploadNumbers;//上传数量
  private String login_lID;
+ private Login login;
+public Login getLogin() {
+	return login;
+}
+public void setLogin(Login login) {
+	this.login = login;
+}
 public int getuId() {
 	return uId;
 }

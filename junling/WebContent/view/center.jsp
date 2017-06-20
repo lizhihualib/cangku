@@ -4,6 +4,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %> 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%  
+String path = request.getContextPath();  
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +30,9 @@
 			});
 		}
 	}
-
+	function PI() {
+		add('个人收藏','<%=basePath%>view/UserHandle/collect.jsp');
+	}
 
 </script>
 </head>
@@ -43,12 +49,12 @@
 				
 				<div class="left" title="用户操作">
 					<a class="top" href="javascript:void(0);" onclick="">签到</a><br>
-					<a href="javascript:void(0);" onclick="add()">个人信息</a><br>
-					<a>修改信息</a><br>
+					<a href="javascript:void(0);" onclick="add('个人信息','<%=basePath%>view/UserHandle/personalInformation.jsp')">个人信息</a><br>
+					<a href="javascript:void(0);" onclick="add('修改信息','<%=basePath%>view/UserHandle/updateInformation.jsp')">修改信息</a><br>
 					<a>阅豆充值</a><br>
 					<a>晋升作者</a><br>
 					<a>在线阅读</a><br>
-					<a href="javascript:void(0);" onclick="add('个人收藏','/junling/view/UserHandle/collect.jsp')">个人收藏</a><br>
+					<a href="javascript:void(0);" onclick="PI()">个人收藏</a><br>
 					<a>上传小说</a><br>
 					<a>个人写书管理</a><br>
 				</div>
@@ -80,7 +86,7 @@
 			</div>
 		</div>
 		<div data-options="region:'center',split:true" style="width:300px;">
-		<div id="tabs" class="easyui-tabs" style="width: 100%;height: 100%">
+			<div id="tabs" class="easyui-tabs" style="width: 100%;height: 100%">
 			</div>
 		</div>
 	</div>
