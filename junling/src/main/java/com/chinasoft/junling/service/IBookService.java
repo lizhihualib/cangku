@@ -7,4 +7,5 @@ import com.chinasoft.junling.bean.Books;
 public interface IBookService {
 	List<Books> queryBooks(Books books);
 	Integer deleteBooks(String id[]);
+	Integer updateBooks(Books books);
 }
