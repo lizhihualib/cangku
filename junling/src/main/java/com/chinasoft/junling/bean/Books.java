@@ -91,12 +91,12 @@ public class Books {
 	public void setUsers_uId(int users_uId) {
 		this.users_uId = users_uId;
 	}
-	@Override
+	/*@Override
 	public String toString() {
 		return "Books [users=" + users.toString() + ", addr=" + addr + ", bId=" + bId + ", bName=" + bName + ", bType=" + bType
 				+ ", bState=" + bState + ", bIntro=" + bIntro + ", bClicks=" + bClicks + ", bDownloads=" + bDownloads
 				+ ", bEdittime=" + bEdittime + ", bOverTime=" + bOverTime + ", users_uId=" + users_uId + "]";
-	}
+	}*/
 	
 	
 	

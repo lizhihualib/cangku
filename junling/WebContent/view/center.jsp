@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a class="top" href="javascript:void(0);" onclick="add('删除小说','books/bookDelete.jsp')" >删除图书</a><br>
 				</div>
 				<div class="left" title="排行榜">
-					<a class="top">小说周人气排行榜</a><br>
+					<a class="top" href="javascript:void(0);" onclick="add('小说排行榜','../view/Ranking.jsp')" >小说周人气排行榜</a><br>
 					<a>小说周月气排行榜</a><br>
 					<a>作者打赏总榜</a><br>
 				</div>
