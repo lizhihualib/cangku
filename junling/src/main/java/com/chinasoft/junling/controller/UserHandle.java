@@ -59,7 +59,14 @@ public class UserHandle {
 	public Object personalInformation(HttpServletRequest req,HttpServletResponse resp,int lID) throws IOException{
 		 
 	     Users user = UserHandeleServiceImpl.personalInformation(lID);
-	     System.out.println(user.getLogin().getuName());
 		return user;  
+	}
+	 @RequestMapping("/updateInformation")
+	 @ResponseBody
+	public Object updateInformation(HttpServletRequest req,HttpServletResponse resp,Users user) throws IOException{
+		 
+	     int falg = UserHandeleServiceImpl.updateInformation(user);
+	     System.out.println(falg);
+		return falg;  
 	}
 }

@@ -16,11 +16,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>个人信息</title>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.min.js"></script>
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/junling/jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
 <link  rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/metro/easyui.css">
 <link rel="stylesheet" href="/junling/css/main.css">
 <script type="text/javascript">
-
 	$.ajax({
 		url:"<%=basePath%>UserHandle/personalInformation.action",
 		type:"post",
@@ -33,17 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#uName").val(data.login.uName);
 			$("#uRealName").val(data.uRealName);
 			$("#uSex").val(data.uSex);
-		
 			$("#uPhone").val(data.uPhone);
 			$("#uEmail").val(data.uEmail);
 			$("#uPenName").val(data.uPenName);
 			$("#uBankCard").val(data.uBankCard);
-			$('#uBirthday').datebox('setValue', data.uBirthday);	
+			$('#uBirthday').datebox('setValue',data.uBirthday);	
 		}
 	})
-
-	
-
 </script>
 </head>
 <body>
@@ -55,6 +51,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td><input id="uName" ></td>
 				</tr>
 				<tr style="height: 15px;"></tr>
+				
+				<tr>
+					<td><label>真&nbsp;&nbsp;实&nbsp;&nbsp;名：</label></td>
+					<td><input id="uRealName" ></td>
+				</tr>
+				<tr style="height: 15px;"></tr>
+				
 				<tr>
 					<td><label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label></td>
 					<td><input id="uSex" ></td>
@@ -62,7 +65,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tr style="height: 15px;"></tr>
 				<tr>
 					<td><label>生&nbsp;&nbsp;&nbsp;&nbsp;日：</label></td>
-					<td><input id="uBirthday" class="easyui-datebox" required="required"></td>
+					<td><input id="uBirthday" 
+							   class="easyui-datebox"
+							   ></td>
 				</tr>
 				<tr style="height: 15px;"></tr>
 				<tr>
@@ -86,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr style="height: 15px;"></tr>
 			</table>
-			<input type="button" value="提交" 
+			<input id="submit" type="button" value="提交" 
 				   style="margin-left: 100px;
 				   background-color: green;
 				   width: 80px;
@@ -94,5 +99,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				   font-size: 20px;">
 		</div>
 	</form>
+	<script type="text/javascript">
+	$(function(){
+		$("#submit").click(function(){
+			$.ajax({
+				url:"<%=basePath%>UserHandle/personalInformation.action",
+				type:"post",
+				dataType:"json",
+				data:{
+					lID:"${sessionScope.loginBean.getlID()}"
+				},
+				success:function(data){
+    					if(		$("#uName").val()==data.login.uName &&
+					   		$("#uRealName").val()==data.uRealName &&
+					   		$("#uSex").val()==data.uSex &&
+							$("#uPhone").val()==data.uPhone &&
+							$("#uEmail").val()==data.uEmail &&
+							$("#uPenName").val()==data.uPenName &&
+							$("#uBankCard").val()==data.uBankCard &&
+							$('#uBirthday').datebox('getValue')==data.uBirthday
+					){
+						alert("亲，你没有做任何修改！");
+					}else{
+						$.ajax({
+							url:"",
+							type:"post",
+							dataType:"json",
+							data:{
+								uName:$("#uName").val(),
+								uName:$("#uRealName").val(),
+								uName:$("#uSex").val(),
+								uName:$("#uPhone").val(),
+								uName:$("#uEmail").val(),
+								uName:$("#uPenName").val(),
+								uName:$("#uBankCard").val(),
+								uName:$("#uBirthday").val(),
+							},
+							success:function(data){
+								altet(修改成功);	
+							}
+						})
+					}	
+				}
+				
+			})
+			
+		})
+	})
+	</script>
 </body>
 </html>

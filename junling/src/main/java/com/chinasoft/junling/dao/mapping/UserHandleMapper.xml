@@ -45,12 +45,33 @@
  	 <select id="queryCollect"  resultMap="booksResults1" parameterType="java.lang.String">
  		select * from books where bId  in (select books_bId from collectbooks where users_uId=#{_parameter})
  	 </select>
- 	 <delete id="deleteCollect" >
+ 	 <delete id="deleteCollect">
  	 	delete from collectbooks where users_uId=#{id} and books_bId in(
 			<foreach collection="array" separator="," item="did" >
 				#{did}
 			</foreach>
 		)  
  	 </delete>
- 	
+ 	 <update id="updateInformation" parameterType="users">
+ 	 	update login set uName=#{uName}
+ 	 </update>
+ 	 <update id="updateInformation1" parameterType="users">
+ 	 	update login set uName=#{uRealName},
+ 	 						   #{uSex},
+ 	 						   #{uBirthday},
+ 	 						   #{uPhone},
+ 	 						   #{uEmail},
+ 	 						   #{uPenName},
+ 	 						   #{uBankCard} where
+ 	 						    
+ 	 						   
+ 	 </update>
  </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
