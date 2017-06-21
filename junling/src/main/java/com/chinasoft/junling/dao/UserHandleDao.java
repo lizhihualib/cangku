@@ -13,5 +13,7 @@ public interface UserHandleDao {
 	public boolean deleteCollect(@Param("array") int[] ids,@Param("id") int lID);
 	public void updateCollect();
 	public Users queryUser(int lID);
+	public int updateInformation(Users user);
+	public int updateInformation1(Users user);
 	
 }

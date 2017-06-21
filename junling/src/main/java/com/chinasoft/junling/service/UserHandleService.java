@@ -11,6 +11,7 @@ public interface UserHandleService {
 	public boolean delete(int[] ids,int lID);
 	public void update();
 	public Users personalInformation(int lID);
+	public int updateInformation(Users user);
 
 	
 }

@@ -47,17 +47,39 @@ $(function(){
 <body>
 	<form id="myInfo">
 		<div style="padding-top: 30px;">
-			<label>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label><span id="uName" style="margin-left: 18px;color: blue;"></span><br/><br/>
-			<label>真实姓名：</label><span id="uRealName" style="margin-left: 20px;color: blue;"></span><br/><br/>
-			<label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label><span id="uSex" style="margin-left: 32px;color: blue;"></span><br/><br/>
-			<label>生&nbsp;&nbsp;&nbsp;&nbsp;日：</label><span id="uBirthday" style="margin-left: 33px;color: blue;"></span><br/><br/>
-			<label>电话号码：</label><span id="uPhone" style="margin-left: 21px;color: blue;"></span><br/><br/>
-			<label>Email：</label><span id="uEmail" style="margin-left: 43px;color: blue;"></span><br/><br/>
-			<label>笔&nbsp;&nbsp;&nbsp;&nbsp;名：</label><span id="uPenName" style="margin-left: 33px;color: blue;"></span><br/><br/>
-			<label>阅豆数量：</label><span id="uBeans" style="margin-left: 20px;color: blue;"></span><br/><br/>
-			<label>银行卡号：</label><span id="uBankCard" style="margin-left: 20px;color: blue;"></span><br/><br/>
-			<label>可上传数量：</label><span id="uUploadNumbers" style="margin-left: 4px;color: blue;"></span><br/><br/>
-			<label>用户类型：</label><span id="uType" style="margin-left: 20px;color: blue;"></span><br/><br/>
+			<label>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
+			<span id="uName" style="margin-left: 18px;color: blue;"></span>
+			<br/><br/>
+			<label>真实姓名：</label>
+			<span id="uRealName" style="margin-left: 20px;color: blue;"></span>
+			<br/><br/>
+			<label>性&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+			<span id="uSex" style="margin-left: 32px;color: blue;"></span>
+			<br/><br/>
+			<label>生&nbsp;&nbsp;&nbsp;&nbsp;日：</label>
+			<span id="uBirthday" style="margin-left: 33px;color: blue;"></span>
+			<br/><br/>
+			<label>电话号码：</label>
+			<span id="uPhone" style="margin-left: 21px;color: blue;"></span>
+			<br/><br/>
+			<label>Email：</label>
+			<span id="uEmail" style="margin-left: 43px;color: blue;"></span>
+			<br/><br/>
+			<label>笔&nbsp;&nbsp;&nbsp;&nbsp;名：</label>
+			<span id="uPenName" style="margin-left: 33px;color: blue;"></span>
+			<br/><br/>
+			<label>阅豆数量：</label>
+			<span id="uBeans" style="margin-left: 20px;color: blue;"></span>
+			<br/><br/>
+			<label>银行卡号：</label>
+			<span id="uBankCard" style="margin-left: 20px;color: blue;"></span>
+			<br/><br/>
+			<label>可上传数量：</label>
+			<span id="uUploadNumbers" style="margin-left: 4px;color: blue;"></span>
+			<br/><br/>
+			<label>用户类型：</label>
+			<span id="uType" style="margin-left: 20px;color: blue;"></span>
+			<br/><br/>
 		</div>	
 	</form>
 </body>
