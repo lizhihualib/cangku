@@ -11,5 +11,6 @@ public interface IBookService {
 	List<Books> queryBooks(Books books);
 	Integer deleteBooks(String id[]);
 	Integer updateBooks(Books books);
-	Integer insertBooks(File dir,HttpServletRequest req);
+	Integer insertBooks(Books books);
+	Integer queryUid(int lId);
 }
