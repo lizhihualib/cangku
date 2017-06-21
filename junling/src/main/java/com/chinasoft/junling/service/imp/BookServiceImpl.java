@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.chinasoft.junling.bean.Books;
+import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.dao.BookDao;
 import com.chinasoft.junling.service.IBookService;
 
@@ -45,8 +46,15 @@ public class BookServiceImpl implements IBookService{
 	
 
 	@Override
-	public Integer insertBooks(File dir, HttpServletRequest req) {
-		return null;
+	public Integer insertBooks(Books books) {
+		Integer row=bookDao.insertBooks(books);
+		return row;
+	}
+
+	@Override
+	public Integer queryUid(int lId) {
+		Users user=bookDao.queryUid(lId);
+		return user.getuId();
 	}
 	
 }

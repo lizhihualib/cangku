@@ -50,6 +50,7 @@ public class LoginControl {
           //在Session里保存信息 
          
     	  session.setAttribute("loginBean", loginBean);
+    	  session.setAttribute("lId", loginBean.getlID());
           session.setAttribute("uType",loginBean.getuType());
           System.out.println(loginBean.getlID());
      	    json.put("status", 1);

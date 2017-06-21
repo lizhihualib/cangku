@@ -3,40 +3,54 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.chinasoft.junling.dao.BookDao">
-  <resultMap type="books" id="booksResults">
- 		<id column="bId" property="bId"/>
- 		<result column="bName" property="bName"/>
- 		<result column="bType" property="bType"/>
- 		<result column="bState" property="bState" />
- 		<result column="bIntro" property="bIntro"/>
- 		<result column="bClicks" property="bClicks" />
- 		<result column="bDownloads" property="bDownloads" />
- 		<result column="bEdittime" property="bEdittime" />
- 		<result column="bOvertime" property="bOverTime" />
- 		<result column="users_uId" property="users_uId"/> 
- 		<association column="uId" property="users" javaType="users" >
- 		   <id column="uId" property="uId"/>
-	 		<result column="uPenName" property="uPenName"/>
- 		</association>
-  </resultMap>
-  
-  <select id="queryBooks" parameterType="books" resultMap="booksResults">
- 		select * from books b 
- 		    left join users u on u.uId=b.users_uId 
-  </select>
-  
-  <delete id="deleteBooks" >
-  		delete from books where bId in
-  		<foreach collection="array" item="id" separator="," open="(" close=")">
- 			#{id}
- 		</foreach>
-  </delete>
-  
-  <update id="updateBooks" parameterType="books">
-  		update books set bName=#{bName},bType=#{bType},bState=#{bState},
-  		bIntro=#{bIntro},bClicks=#{bClicks},bDownloads=#{bDownloads},bEdittime=#{bEdittime},bOverTime=#{bOverTime} 
-  		where bId=#{bId}
-  </update>
+	  <resultMap type="books" id="booksResults">
+	 		<id column="bId" property="bId"/>
+	 		<result column="bName" property="bName"/>
+	 		<result column="bType" property="bType"/>
+	 		<result column="bState" property="bState" />
+	 		<result column="bIntro" property="bIntro"/>
+	 		<result column="bClicks" property="bClicks" />
+	 		<result column="bDownloads" property="bDownloads" />
+	 		<result column="bEdittime" property="bEdittime" />
+	 		<result column="bOvertime" property="bOverTime" />
+	 		<result column="users_uId" property="users_uId"/> 
+	 		<association column="uId" property="users" javaType="users" >
+	 		   <id column="uId" property="uId"/>
+		 		<result column="uPenName" property="uPenName"/>
+	 		</association>
+	  </resultMap>
+	  
+	  <resultMap type="users" id="usersResults">
+	  	<id column="uId"  property="uId"/>
+	  </resultMap>
+	  
+	  <select id="queryBooks" parameterType="books" resultMap="booksResults">
+	 		select * from books b 
+	 		    left join users u on u.uId=b.users_uId 
+	  </select>
+	  
+	  <delete id="deleteBooks" >
+	  		delete from books where bId in
+	  		<foreach collection="array" item="id" separator="," open="(" close=")">
+	 			#{id}
+	 		</foreach>
+	  </delete>
+	  
+	  <update id="updateBooks" parameterType="books">
+	  		update books set bName=#{bName},bType=#{bType},bState=#{bState},
+	  		bIntro=#{bIntro},bClicks=#{bClicks},bDownloads=#{bDownloads},bEdittime=#{bEdittime},bOverTime=#{bOverTime} 
+	  		where bId=#{bId}
+	  </update>
+	  
+	  <insert id="insertBooks">
+	  		insert into books(bName,bType,bState,bIntro,bEdittime,bOverTime,addr,users_uId) 
+	  		values(#{bName},#{bType},#{bState},#{bIntro},#{bEdittime},#{bOverTime},#{addr},#{users_uId})
+	  </insert>
+	  
+	  <select id="queryUid" parameterType="users" resultMap="usersResults">
+	  	    select uId from users where login_lID=#{lId}
+	  </select>
+	  
   </mapper>
   
   
