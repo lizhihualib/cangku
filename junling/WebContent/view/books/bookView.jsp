@@ -9,6 +9,7 @@
 <script type="text/javascript" src="/junling/jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/icon.css">
 <link rel="stylesheet" href="/junling/jquery-easyui-1.5.2/themes/metro/easyui.css">
+<link rel="stylesheet" href="/junling/css/bookView.css">
 <script type="text/javascript">
 	$(function(){
 		//删除操作
@@ -101,7 +102,7 @@
             var h = date.getHours();  
             var min = date.getMinutes();  
             var sec = date.getSeconds();  
-            var str = y+'/'+(m<10?('0'+m):m)+'/'+(d<10?('0'+d):d)+'/'+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(sec<10?('0'+sec):sec);  
+            var str = y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+'-'+' '+(h<10?('0'+h):h)+':'+(min<10?('0'+min):min)+':'+(sec<10?('0'+sec):sec);  
             return str;  
         }  
         function w4(s){  
@@ -117,7 +118,8 @@
             } else {  
                 return new Date();  
             }  
-        }  
+        }
+        
 </script>
 </head>
 <body>
@@ -128,8 +130,7 @@
 				<th data-options="field:'bId',width:100">小说ID</th>
 				<th data-options="field:'bName',width:100">小说名</th>
 				<th data-options="field:'users',width:100,formatter:function(users){
-				return users.uPenName;
-				}">作者</th>
+				return users.uPenName;}">作者</th>
 				<th data-options="field:'bType',width:100">小说类型</th>
 				<th data-options="field:'bState',width:100">小说状态</th>
 				<th data-options="field:'bIntro',width:100">简介</th>
@@ -163,12 +164,12 @@
 	</div> -->
 	
 	
-	<div id="updateDlg" class="easyui-dialog" style="width:300px;height:300px" closed="true">
+	<div id="updateDlg" class="easyui-dialog" style="width:360px;height:300px" closed="true">
 		<form id="updateForm" method="post" style="width:100%;height:100%" buttons="#update-dlg-btns">
 			<table align="center">
 				<tr >
 					<td><label >小说ID：</label></td>
-					<td><input  class="easyui-textbox" name="bId" id="bId"   required="true" readonly="true"/></td>
+					<td><input  class="easyui-textbox" name="bId" id="bId"   required="true" readonly="true"/><span class="span">*不可更改</span></td>
 				</tr>
 				<tr>
 					<td><label>小说名：</label></td>
@@ -176,16 +177,14 @@
 				</tr>
 				
 				<tr>
-					<td><label>作者：</label></td>
-					<td><input class="easyui-textbox" name="uPenName"  id="uPenName" readonly="true"/></td>
-				</tr>
-				<tr>
 					<td><label>小说类型：</label></td>
-					<td><input class="easyui-textbox" name="bType"  id="bType" required="true"/></td>
+					<td><input class="easyui-textbox" name="bType"  id="bType" required="true"  /></td>
 				</tr>
 				<tr>
 					<td><label>小说状态：</label></td>
-					<td><input class="easyui-textbox"  name="bState"  id="bState"  required="true"/></td>
+					<td><select   name="bState"  id="bState"  required="true" >
+						<option>连载中</option><option>已完结</option>
+					</select></td>
 				</tr>
 				<tr>
 					<td><label>简介：</label></td>
@@ -193,19 +192,19 @@
 				</tr>
 				<tr>
 					<td><label>点击量：</label></td>
-					<td><input class="easyui-textbox"  name="bClicks"  id="bClicks"  readonly="true"/></td>
+					<td><input class="easyui-textbox"  name="bClicks"  id="bClicks"  readonly="true"/><span class="span">*不可更改</span></td>
 				</tr>
 				<tr>
 					<td><label>下载量：</label></td>
-					<td><input class="easyui-textbox"  name="bDownloads"  id="bDownloads"  readonly="true"/></td>
+					<td><input class="easyui-textbox"  name="bDownloads"  id="bDownloads"  readonly="true"/><span class="span">*不可更改</span></td>
 				</tr>
 				<tr>
 					<td><label>最近上传时间：</label></td>
-					<td><input class="easyui-textbox"  name="bEdittime"  id="bEdittime" readonly="true" /></td>
+					<td><input class="easyui-textbox" data-options="formatter:ww4,parser:w4" editable="false" name="bEdittime"  id="bEdittime" readonly="true" /><span class="span">*不可更改</span></td>
 				</tr>
 				<tr>
 					<td><label>完结时间：</label></td>
-					<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4"  name="bOverTime"  id="bOverTime"  /></td>
+					<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4" editable="false" name="bOverTime"  id="bOverTime"  /></td>
 				</tr>
 				
 			</table>
@@ -233,7 +232,7 @@
 			
 			<tr>
 				<td><label>作者：</label></td>
-				<td><input class="easyui-textbox" name="uPenName"  id="luPenName" /></td>
+				<td><input class="easyui-textbox" name="uPenName"  id="luPenName" value=默认当前登陆账号  readonly="true"/></td>
 			</tr>
 			<tr>
 				<td><label>小说类型：</label></td>
@@ -249,19 +248,19 @@
 			</tr>
 			<tr>
 				<td><label>点击量：</label></td>
-				<td><input class="easyui-textbox"  name="bClicks"  id="lbClicks"  /></td>
+				<td><input class="easyui-textbox"  name="bClicks"  id="lbClicks"  value=0  readonly="true" /></td>
 			</tr>
 			<tr>
 				<td><label>下载量：</label></td>
-				<td><input class="easyui-textbox"  name="bDownloads"  id="lbDownloads"  /></td>
+				<td><input class="easyui-textbox"  name="bDownloads"  id="lbDownloads"  value=0 readonly="true"/></td>
 			</tr>
 			<tr>
 				<td><label>最近上传时间：</label></td>
-				<td><input class="easyui-textbox"  name="bEdittime"  id="lbEdittime" /></td>
+				<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4" editable="false" name="bEdittime"  id="lbEdittime" /></td>
 			</tr>
 			<tr>
 				<td><label>完结时间：</label></td>
-				<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4"  name="bOverTime"  id="lbOverTime"  /></td>
+				<td><input class="easyui-datetimebox"  data-options="formatter:ww4,parser:w4" editable="false" name="bOverTime"  id="lbOverTime"  /></td>
 			</tr>
 			  
 
