@@ -1,8 +1,10 @@
 package com.chinasoft.junling.controller;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.chinasoft.junling.bean.Books;
 import com.chinasoft.junling.bean.Login;
+import com.chinasoft.junling.bean.MyComparator;
 import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.service.IUsersService;
 
@@ -30,7 +34,7 @@ public class UsersController {
 	  private IUsersService userService;
 	@RequestMapping(value="/queryAuthors")
 	@ResponseBody
-	 public Map queryAuthors(HttpServletResponse resp,HttpSession session,Users users) throws Exception{
+	 public Map queryAuthors(Users users) throws Exception{
 		Map map=new HashMap<String,Object>();
 		List<Users> rows=userService.queryAuthors(users);
 		int count=userService.count(users);
@@ -84,6 +88,7 @@ public class UsersController {
 	
 	}
 	@RequestMapping(value="/deleteUser")
+	@ResponseBody
 	 public void deleteUser(HttpServletResponse resp,int[] uId) throws Exception{
 		boolean flag=userService.deleteUser(uId);
 		JSONObject json=new JSONObject();
@@ -96,6 +101,26 @@ public class UsersController {
 		}
 		resp.getWriter().println(json);
 	
+	}
+	@RequestMapping(value="/queryRanking")
+	@ResponseBody
+	public Map queryRanking(Books books){
+		int num=0;
+		int[] array=new int [10];
+		List<Books> list=userService.queryRanking(books);
+		 Collections.sort(list, new MyComparator());
+		 Iterator<Books> it=list.iterator();
+		 while(it.hasNext()){
+			 array[num]=it.next().getbId();
+			 ++num;
+			 if(num>9)
+				 break;
+		 }
+		List<Books> list1=userService.queryRankingtwo(array);
+		Collections.sort(list1, new MyComparator());
+		 Map map=new HashMap<String,Object>();
+		 map.put("rows", list1);
+		return map;
 	}
 	
 }

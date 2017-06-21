@@ -1,7 +1,9 @@
 package com.chinasoft.junling.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.chinasoft.junling.bean.Books;
 import com.chinasoft.junling.bean.Users;
 
 public interface UsersDao {
@@ -12,4 +14,6 @@ public interface UsersDao {
 	boolean insertUser(Users users);
 	int count(Users users);
 	int count1(Users users);
+	ArrayList<Books> queryRanking(Books books);
+	List<Books> queryRankingtwo(int[] array);
 }

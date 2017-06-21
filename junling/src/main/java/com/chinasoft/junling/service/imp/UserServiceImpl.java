@@ -1,11 +1,13 @@
 package com.chinasoft.junling.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.chinasoft.junling.bean.Books;
 import com.chinasoft.junling.bean.Users;
 import com.chinasoft.junling.dao.UsersDao;
 import com.chinasoft.junling.service.IUsersService;
@@ -49,7 +51,15 @@ public class UserServiceImpl implements IUsersService{
 		return usersdao.count1(users);
 	}
 
+	@Override
+	public ArrayList<Books> queryRanking(Books books) {
+		return usersdao.queryRanking(books);
+	}
 
+	@Override
+	public List<Books> queryRankingtwo(int[] array) {
+		return usersdao.queryRankingtwo(array);
+	}
 	
 
 }
