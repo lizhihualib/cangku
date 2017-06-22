@@ -104,7 +104,7 @@ public class UsersController {
 	}
 	@RequestMapping(value="/queryRanking")
 	@ResponseBody
-	public Map queryRanking(Books books){
+	public List queryRanking(Books books){
 		int num=0;
 		int[] array=new int [10];
 		List<Books> list=userService.queryRanking(books);
@@ -118,9 +118,8 @@ public class UsersController {
 		 }
 		List<Books> list1=userService.queryRankingtwo(array);
 		Collections.sort(list1, new MyComparator());
-		 Map map=new HashMap<String,Object>();
-		 map.put("rows", list1);
-		return map;
+		
+		return list1;
 	}
 	
 }
