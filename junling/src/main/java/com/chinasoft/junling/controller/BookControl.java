@@ -29,17 +29,16 @@ public class BookControl {
 
 	@Resource
 	private IBookService bookService;
-	/*@Resource
-	private Books books;*/
 
 	
 	
 	@RequestMapping(value="/querybooks") 
 	@ResponseBody
-	public Map queryBooks(HttpSession session,Books books){
+	public Map queryBooks(Books books){
 		Map map=new HashMap<String,Object>();
 		List<Books> rows=bookService.queryBooks(books);
-		       
+		int total=bookService.countTotal(books);
+		map.put("total", total);
 		map.put("rows", rows);
 		return map;
 	}
@@ -98,8 +97,11 @@ public class BookControl {
 		books.setbType(req.getParameter("bType"));
 		books.setbState(req.getParameter("bState")); 
 		books.setbIntro(req.getParameter("bIntro"));
-		books.setbClicks(Integer.valueOf(req.getParameter("bClicks"))); 
-		books.setbDownloads(req.getParameter("bDownloads")); 
+		//books.setbClicks(Integer.valueOf(req.getParameter("bClicks"))); 
+		//books.setbDownloads(Integer.valueOf(req.getParameter("bDownloads"))); 
+		books.setbClicks(0);
+		books.setbDownloads(0);
+		
 		books.setbEdittime(req.getParameter("bEdittime"));
 		books.setbOverTime(req.getParameter("bOverTime"));
 		books.setUsers_uId(uId);

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Books {
+public class Books extends Page{
 	private Users users;
 	public Users getUsers() {
 		return users;
@@ -26,7 +26,7 @@ public class Books {
 	private String bState;
 	private String bIntro;
 	private int bClicks;
-	private String bDownloads;
+	private int bDownloads;
 	private String bEdittime;
 	private String bOverTime;
 	private int users_uId;
@@ -67,10 +67,10 @@ public class Books {
 	public void setbClicks(int bClicks) {
 		this.bClicks = bClicks;
 	}
-	public String getbDownloads() {
+	public int getbDownloads() {
 		return bDownloads;
 	}
-	public void setbDownloads(String bDownloads) {
+	public void setbDownloads(int bDownloads) {
 		this.bDownloads = bDownloads;
 	}
 	public String getbEdittime() {
@@ -91,10 +91,6 @@ public class Books {
 	public void setUsers_uId(int users_uId) {
 		this.users_uId = users_uId;
 	}
-
-
 	
-	
-
 	
 }
