@@ -56,5 +56,11 @@ public class BookServiceImpl implements IBookService{
 		Users user=bookDao.queryUid(lId);
 		return user.getuId();
 	}
+
+	@Override
+	public Integer countTotal(Books books) {
+		int total=bookDao.countTotal(books);
+		return total;
+	}
 	
 }

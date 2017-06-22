@@ -71,10 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				
 				<div class="left" title="图书管理">
-					<a class="top" href="javascript:void(0);" onclick="add('展示书架','/junling/view/books/bookView.jsp')" >查询图书</a><br>
-					<a>添加图书</a><br>
-					<a>修改图书</a><br>
-					<a class="top" href="javascript:void(0);" onclick="add('删除小说','books/bookDelete.jsp')" >删除图书</a><br>
+					<a class="top" href="javascript:void(0);" onclick="add('展示书架','/junling/view/books/bookView.jsp')" >图书操作</a><br>
 				</div>
 				<div class="left" title="排行榜">
 					<a class="top" href="javascript:void(0);" onclick="add('小说排行榜','../view/Ranking.jsp')" >小说周人气排行榜</a><br>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.chinasoft.junling.bean.Books;
 
 public interface IBookService {
+	Integer countTotal(Books books);
 	List<Books> queryBooks(Books books);
 	Integer deleteBooks(String id[]);
 	Integer updateBooks(Books books);

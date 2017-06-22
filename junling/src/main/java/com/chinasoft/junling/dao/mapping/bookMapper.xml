@@ -27,6 +27,21 @@
 	  <select id="queryBooks" parameterType="books" resultMap="booksResults">
 	 		select * from books b 
 	 		    left join users u on u.uId=b.users_uId 
+	  	    <where>
+	  		    <if test="bName!=null and bName!='%%' ">
+	  		    	and bName like #{bName}
+	  		    </if> 	
+	  		    <if test="bType!=null and bType!='%%' ">
+	  		    	and bType like #{bType}
+	  		    </if> 
+	  		    <if test="bState!=null and bState!='%%' ">
+	  		    	and bState like #{bState}
+	  		    </if> 
+	  		    <if test="users!=null and users.uPenName!=null and users.uPenName!='%%' ">
+	  		    	and uPenName like #{users.uPenName}
+	  		    </if> 
+	  	    </where>
+	 		    limit #{star},#{pageSize}
 	  </select>
 	  
 	  <delete id="deleteBooks" >
@@ -49,6 +64,9 @@
 	  
 	  <select id="queryUid" parameterType="users" resultMap="usersResults">
 	  	    select uId from users where login_lID=#{lId}
+	  </select>
+	  <select id="countTotal" resultType="int" parameterType="books">
+	  		select count(bId) from books
 	  </select>
 	  
   </mapper>
