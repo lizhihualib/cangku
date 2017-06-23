@@ -12,6 +12,8 @@ public interface UserHandleService {
 	public void update();
 	public Users personalInformation(int lID);
 	public int updateInformation(Users user);
+	public int updateSignState(int id, String timeNow, int val);
+	public Users querySignIn(int id);
 
 	
 }

@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		},
 		success:function(data){
 			//var json=eval("("+data+")");
+			$("#uId").val(data.uId);
 			$("#uName").val(data.login.uName);
 			$("#uRealName").val(data.uRealName);
 			$("#uSex").val(data.uSex);
@@ -46,6 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form id="myInfo">
 		<div style="margin-left: 400px;margin-top: 150px; ">
 			<table>
+				<tr style="display: none;">
+					<td><label>id</label></td>
+					<td><input id="uId" ></td>
+				</tr>
 				<tr>
 					<td><label>用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label></td>
 					<td><input id="uName" ></td>
@@ -100,6 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</form>
 	<script type="text/javascript">
+
 	$(function(){
 		$("#submit").click(function(){
 			$.ajax({
@@ -110,40 +116,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					lID:"${sessionScope.loginBean.getlID()}"
 				},
 				success:function(data){
-    					if(		$("#uName").val()==data.login.uName &&
+						var uName=data.login.uName;
+    					if(	$("#uName").val()==data.login.uName &&
 					   		$("#uRealName").val()==data.uRealName &&
 					   		$("#uSex").val()==data.uSex &&
 							$("#uPhone").val()==data.uPhone &&
 							$("#uEmail").val()==data.uEmail &&
 							$("#uPenName").val()==data.uPenName &&
 							$("#uBankCard").val()==data.uBankCard &&
-							$('#uBirthday').datebox('getValue')==data.uBirthday
-					){
+							$('#uBirthday').datebox('getValue')==data.uBirthday)
+    				{
 						alert("亲，你没有做任何修改！");
 					}else{
 						$.ajax({
-							url:"",
+							url:"<%=basePath%>UserHandle/updateInformation.action",
 							type:"post",
 							dataType:"json",
 							data:{
-								uName:$("#uName").val(),
-								uName:$("#uRealName").val(),
-								uName:$("#uSex").val(),
-								uName:$("#uPhone").val(),
-								uName:$("#uEmail").val(),
-								uName:$("#uPenName").val(),
-								uName:$("#uBankCard").val(),
-								uName:$("#uBirthday").val(),
+								uId:$("#uId").val(),
+								'login.uName':$("#uName").val(),
+								uRealName:$("#uRealName").val(),
+								uSex:$("#uSex").val(),
+								uPhone:$("#uPhone").val(),
+								uEmail:$("#uEmail").val(),
+								uPenName:$("#uPenName").val(),
+								uBankCard:$("#uBankCard").val(),
+								uBirthday:$("#uBirthday").val(),
 							},
 							success:function(data){
-								altet(修改成功);	
+								if(data==1){
+									alert("修改成功");
+									if(uName!==($("#uName").val())){
+										alert("小主：用户名已被修改，请重新登录！");
+										parent.location.href="<%=basePath%>view/login.jsp";
+									}
+								}else{alert("修改失败")}	
 							}
 						})
 					}	
 				}
-				
 			})
-			
 		})
 	})
 	</script>

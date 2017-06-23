@@ -88,11 +88,13 @@ public String getuUploadNumbers() {
 public void setuUploadNumbers(String uUploadNumbers) {
 	this.uUploadNumbers = uUploadNumbers;
 }
+
 @Override
 public String toString() {
 	return "Users [uId=" + uId + ", uRealName=" + uRealName + ", uSex=" + uSex + ", uBirthday=" + uBirthday
 			+ ", uPhone=" + uPhone + ", uEmail=" + uEmail + ", uPenName=" + uPenName + ", uBeans=" + uBeans
-			+ ", uBankCard=" + uBankCard + ", uSignState=" + uSignState + ", uUploadNumbers=" + uUploadNumbers + "]";
+			+ ", uBankCard=" + uBankCard + ", uSignState=" + uSignState + ", uUploadNumbers=" + uUploadNumbers
+			+ ", login_lID=" + login_lID + ", login=" + login + "]";
 }
 public String getLogin_lID() {
 	return login_lID;

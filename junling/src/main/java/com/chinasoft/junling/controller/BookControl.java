@@ -109,5 +109,8 @@ public class BookControl {
   
         Integer row=bookService.insertBooks(books);
         return "view/books/bookView";
+        
+        
+        
 	}
 }
