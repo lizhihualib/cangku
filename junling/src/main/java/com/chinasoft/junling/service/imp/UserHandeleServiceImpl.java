@@ -55,9 +55,26 @@ public class UserHandeleServiceImpl implements UserHandleService{
 		// TODO Auto-generated method stub
 		int falg1 = userHandleDao.updateInformation(user);
 		int falg2 = userHandleDao.updateInformation1(user);
-		System.out.println(falg1);
-		System.out.println(falg2);
-		return 0;
+		if(falg1==1&&falg2==1){
+			return 1;
+		}else{
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public int updateSignState(int id,String timeNow,int val) {
+		// TODO Auto-generated method stub
+		int updateSignStateResult = userHandleDao.updateSignState(id,timeNow,val);
+		
+		return updateSignStateResult;
+	}
+
+	@Override
+	public Users querySignIn(int id) {
+		// TODO Auto-generated method stub
+		return userHandleDao.querySignIn(id);
 	}
 	
 }

@@ -16,8 +16,7 @@
  		<result column="users_uId" property="users_uId"/>
  	 </resultMap>
  	 <resultMap id="usersResults" type="users" >
- 		<id column="bId" property="bId"/>
- 		<result column="bName" property="uName"/>
+ 		<id column="uId" property="uId"/>
  		<result column="uRealName" property="uRealName"/>
  		<result column="uSex" property="uSex" />
  		<result column="uBirthday" property="uBirthday"/>
@@ -28,6 +27,7 @@
  		<result column="uBankCard" property="uBankCard"/>
  		<result column="uUploadNumbers" property="uUploadNumbers"/>
  		<result column="bsers_uId" property="uType"/>
+ 		<result column="uSignState" property="uSignState"/>
  		<association column="login_lID" property="login" javaType="login">
  			<id column="lID" property="lID"/>
 	 		<result column="uName" property="uName"/>
@@ -53,19 +53,27 @@
 		)  
  	 </delete>
  	 <update id="updateInformation" parameterType="users">
- 	 	update login set uName=#{uName}
+ 	 	update login set uName=#{login.uName} where lID=(
+ 	 	select login_lID from users where uId=#{uId})
+ 	 	
  	 </update>
  	 <update id="updateInformation1" parameterType="users">
- 	 	update login set uName=#{uRealName},
- 	 						   #{uSex},
- 	 						   #{uBirthday},
- 	 						   #{uPhone},
- 	 						   #{uEmail},
- 	 						   #{uPenName},
- 	 						   #{uBankCard} where
- 	 						    
- 	 						   
+ 	 	update users set uRealName=#{uRealName},
+ 						 uSex=#{uSex},
+ 						 uBirthday=#{uBirthday},
+ 						 uPhone=#{uPhone},
+ 						 uEmail=#{uEmail},
+ 						 uPenName=#{uPenName},
+ 						 uBankCard=#{uBankCard} where uId=#{uId}
  	 </update>
+ 	 <update id="updateSignState">
+ 	 	update users set uBeans=uBeans+#{addBeans},uSignState=#{timeNow} where uId=#{id}
+ 	 	
+ 	 </update>
+ 	 
+ 	 <select id="querySignIn"  resultMap="usersResults" parameterType="java.lang.Integer">
+ 		select * from users where uId=#{_parameter}
+ 	 </select>
  </mapper>
  
  

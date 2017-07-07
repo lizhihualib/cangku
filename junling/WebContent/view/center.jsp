@@ -33,7 +33,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function PI() {
 		add('个人收藏','<%=basePath%>view/UserHandle/collect.jsp');
 	}
-
+	function SignIn() {
+			$.ajax({
+				url:"<%=basePath%>UserHandle/personalInformation.action",
+				type:"post",
+				dataType:"json",
+				data:{
+					lID:"${sessionScope.loginBean.getlID()}"
+				},
+				success:function(data){
+					var userId=data.uId;
+					$.ajax({
+						url:"<%=basePath%>UserHandle/updateSignIn.action",
+						type:"post",
+						dataType:"json",
+						data:{
+							id:userId
+						},
+						success:function(data){
+			
+							if(data.result==1){
+								alert("签到成功！");	
+							}else{
+								alert("签到失败！");
+							}
+							alert(data.tip);
+						}
+					})
+				}
+			})
+		}
 </script>
 </head>
 <body>
@@ -48,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div  class="easyui-accordion" style="width:110px;height:300px;">
 				
 				<div class="left" title="用户操作">
-					<a class="top" href="javascript:void(0);" onclick="">签到</a><br>
+					<a class="top" href="javascript:void(0);" onclick="SignIn()">签到</a><br>
 					<a href="javascript:void(0);" onclick="add('个人信息','<%=basePath%>view/UserHandle/personalInformation.jsp')">个人信息</a><br>
 					<a href="javascript:void(0);" onclick="add('修改信息','<%=basePath%>view/UserHandle/updateInformation.jsp')">修改信息</a><br>
 					<a>阅豆充值</a><br>

@@ -15,5 +15,8 @@ public interface UserHandleDao {
 	public Users queryUser(int lID);
 	public int updateInformation(Users user);
 	public int updateInformation1(Users user);
+	public Users querySignState(int id);
+	public int updateSignState(@Param("id") int id, @Param("timeNow") String timeNow,@Param("addBeans") int val);
+	public Users querySignIn(int id);
 	
 }
